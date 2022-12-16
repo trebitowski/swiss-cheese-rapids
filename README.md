@@ -1,1 +1,1 @@
-# UNity game for ScoreSpace-Jam-23
+# Unity game for ScoreSpace-Jam-23
