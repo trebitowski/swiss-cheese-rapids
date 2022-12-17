@@ -20,13 +20,23 @@ public class RaftScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool occupied = false;
+        GameObject player;
+         foreach (Transform child in transform)
+         {
+             if (child.tag == "Player")
+             {
+                 player = child.gameObject;
+                 occupied = true;
+             }
+         }
 
-    
-        angle += Input.GetAxis("Horizontal") * Time.deltaTime * angleStrength;
+        float input = occupied == true ? Input.GetAxis("Horizontal") : 0;
+        angle += input * Time.deltaTime * angleStrength;
         angle = Mathf.Clamp(angle, -maxAngle, maxAngle);
 
         
-        if (Input.GetAxis("Horizontal") == 0 && angle != 0f){
+        if (input == 0 && angle != 0f){
             angle += rotateBack * Time.deltaTime;
             if (Mathf.Abs(angle) < 1) {
                 angle = 0;
