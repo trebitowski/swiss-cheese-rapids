@@ -56,7 +56,10 @@ public class RaftScript : MonoBehaviour
 
         float riverHorizontalComponent = riverSpeed * Mathf.Sin(Mathf.Deg2Rad * targetAngle);
 
+        // transform.position = transform.position + Time.deltaTime * Vector3.right *  // original
+            // (riverHorizontalComponent + horizontalSpeed);
+
         transform.position = transform.position + Time.deltaTime * Vector3.right * 
-            (riverHorizontalComponent + horizontalSpeed);
+            (riverHorizontalComponent + horizontalSpeed) + Time.deltaTime * Vector3.up * riverSpeed;
     }
 }
