@@ -40,9 +40,9 @@ public class RaftScript : MonoBehaviour
         
         if (input == 0 && angle != targetAngle){
             angle += rotateBack * Time.deltaTime;
-            // if (Mathf.Abs(targetAngle - angle) < 1) {
-            //     angle = targetAngle;
-            // }
+            if (Mathf.Abs(targetAngle - angle) < 1) {
+                angle = targetAngle;
+            }
             if (angle > targetAngle) {
                 rotateBack = -returnAngleStrength;
             } else {
@@ -61,5 +61,17 @@ public class RaftScript : MonoBehaviour
 
         transform.position = transform.position + Time.deltaTime * Vector3.right * 
             (riverHorizontalComponent + horizontalSpeed) + Time.deltaTime * Vector3.up * riverSpeed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Enter");
+        if (other.CompareTag("Cheese")) {
+            Debug.Log("Cheese");
+        } else if (other.CompareTag("Obstacle")) {
+            Debug.Log("Obstacle");
+        } else if (other.CompareTag("Riverbank")) {
+            Debug.Log("Riverbank");
+        }
     }
 }

@@ -12,10 +12,21 @@ public class ProceduralRiver : MonoBehaviour
     public float speed; // units per second
     private float unit_height = 10; // number of pixels in a Unity unit
     [SerializeField] GameObject water;
+    public GameObject[] cheeses;
+    public GameObject[] obstacles;
+    public int obstacleTries;
+    public float spawnWidthRange; // the total range of the spawnable width of the river
     Vector2 waterEdge;
+
+    public float obstacleRate;
+    private float obstacleTimer;
+    public float obstacleHeightVariation;
+    public float cheeseRate;
+    private float cheeseTimer;
     // Start is called before the first frame update
     void Start(){
         Generation();
+        obstacleTimer = obstacleRate; // spawn obstacles right away
         //startTime = Time.time;
     }
 
@@ -45,6 +56,10 @@ public class ProceduralRiver : MonoBehaviour
     void Update(){
         float offset = 15;
         float camTopPos = 40.0f + Camera.main.transform.position.y;
+
+        obstacleTimer += Time.deltaTime;
+        cheeseTimer += Time.deltaTime;
+
         if (waterEdge.y/unit_height < camTopPos)
         {
             t += 1.0f;
@@ -52,8 +67,26 @@ public class ProceduralRiver : MonoBehaviour
             Vector2 waterPos = riverFuntion(t);
             float edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 5000.0f) - 0.5f)*2.0f; // dist from river center to first river edge
             waterEdge = waterPos + riverFuntionPerp(edgeDist);
-            spawnObj(water, waterEdge.x, waterEdge.y/unit_height);
+            spawnRiver(water, waterEdge.x, waterEdge.y/unit_height);
+
+                  
+            if (obstacleTimer > obstacleRate) {
+                 int count = Random.Range(1,obstacleTries);
+                for (int i = 0; i < count; i++)
+                {
+                    spawnObstacle(waterEdge.x, Random.Range(waterEdge.y/unit_height - obstacleHeightVariation, waterEdge.y/unit_height + obstacleHeightVariation));   
+                } 
+                obstacleTimer = Random.Range(0, 0.5f);
+            }
+
+            if (cheeseTimer > cheeseRate) {
+                spawnCheese(waterEdge.x, waterEdge.y/unit_height);    
+                cheeseTimer = Random.Range(0, cheeseTimer);
+            }
         }
+
+        
+
     }
 
     void Generation(){
@@ -68,12 +101,12 @@ public class ProceduralRiver : MonoBehaviour
             waterEdge = waterPos + riverFuntionPerp(edgeDist);
 
             // first river side
-            spawnObj(water, waterEdge.x, waterEdge.y/unit_height);
+            spawnRiver(water, waterEdge.x, waterEdge.y/unit_height);
         }
     }
 
     // Spawn an instance of the game object
-    void spawnObj(GameObject obj, float width, float height){
+    void spawnRiver(GameObject obj, float width, float height){
         GameObject objInst = Instantiate(obj, new Vector2(width, height), Quaternion.identity);
         objInst.transform.parent = this.transform;
     }
@@ -92,5 +125,15 @@ public class ProceduralRiver : MonoBehaviour
         perp.x = t;
         perp.y = 0;
         return perp;
+    }
+
+    void spawnCheese(float width, float height){
+        GameObject objInst = Instantiate(cheeses[Random.Range(0,cheeses.Length)], new Vector2(Random.Range(width - spawnWidthRange, width + spawnWidthRange), height), Quaternion.identity);
+        objInst.transform.parent = this.transform;
+    }
+
+    void spawnObstacle(float width, float height){
+        GameObject objInst = Instantiate(obstacles[Random.Range(0,obstacles.Length)], new Vector2(Random.Range(width - spawnWidthRange, width + spawnWidthRange), height), Quaternion.identity);
+        objInst.transform.parent = this.transform;
     }
 }
