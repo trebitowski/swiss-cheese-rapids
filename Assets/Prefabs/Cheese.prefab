@@ -124,5 +124,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d79b11e457eca4d84e7b581d392a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  destroyZone: -6
+  moveSpeed: 8
+  destroyZone: -12
