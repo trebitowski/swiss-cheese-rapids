@@ -52,6 +52,6 @@ public class RaftScript : MonoBehaviour
         float normalizedAngle = Mathf.InverseLerp(-maxAngle, maxAngle, angle);
         float horizontalSpeed = Mathf.Lerp(-moveStrength, moveStrength, normalizedAngle);
 
-        transform.position = transform.position + Vector3.right * horizontalSpeed * Time.deltaTime;
+        transform.position = transform.position + Vector3.right * horizontalSpeed * Time.deltaTime;// + Vector3.up * Time.deltaTime * 2;
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3316799009709375771}
   - component: {fileID: 474744633588308359}
   - component: {fileID: 1080995323693756391}
+  - component: {fileID: 226130636639741681}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -116,3 +117,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   destroyZone: -6
+--- !u!114 &226130636639741681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7743443522210470752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf7122d863fe524f90665ee45d84141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 3316799009709375771}
+  sprites:
+  - {fileID: 21300000, guid: 4d60ed91d01bf0442bff75acbd2fe795, type: 3}
+  - {fileID: 21300000, guid: 92351705393365a43a75be7f2b6ac8c0, type: 3}
+  - {fileID: 21300000, guid: d2b7b03e4add3b642a506c4d093c4997, type: 3}
+  - {fileID: 21300000, guid: f1c29fdaf36f2c14ba1e713b932bb096, type: 3}
