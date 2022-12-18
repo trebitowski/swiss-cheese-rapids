@@ -7,24 +7,34 @@ public class RaftScript : MonoBehaviour
     public Rigidbody2D raftRigidBody;
     public GameObject scoreManager;
     public GameObject gameManager;
+    public Collider2D raftCollider;
     bool movementEnabled = true;
     public float moveStrength;
     public float maxAngle = 60;
     public float angleStrength;
     public float returnAngleStrength;
     public float targetAngle = 0;
-    public float riverSpeed = 8;
+    public float riverSpeed = 8f;
+    public float rapidSpeed = 12f;
+    // public float currentSpeed;
     float rotateBack = 0f;
+    LayerMask riverMask;
     float angle = 0f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        // currentSpeed = rapidSpeed;
+        riverMask = LayerMask.GetMask("River");
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+
+        float currentSpeed = riverSpeed;
+        if (raftCollider.IsTouchingLayers(riverMask)) {
+            currentSpeed = rapidSpeed;
+        }
         if (movementEnabled == true) {
         bool occupied = false;
         GameObject player;
@@ -58,26 +68,34 @@ public class RaftScript : MonoBehaviour
         float normalizedAngle = Mathf.InverseLerp(-maxAngle + targetAngle, maxAngle + targetAngle, angle);
         float horizontalSpeed = Mathf.Lerp(-moveStrength, moveStrength, normalizedAngle);
 
-        float riverHorizontalComponent = riverSpeed * Mathf.Sin(Mathf.Deg2Rad * targetAngle);
+        float riverHorizontalComponent = currentSpeed * Mathf.Sin(Mathf.Deg2Rad * targetAngle);
 
         // transform.position = transform.position + Time.deltaTime * Vector3.right *  // original
             // (riverHorizontalComponent + horizontalSpeed);
 
         transform.position = transform.position + Time.deltaTime * Vector3.right * 
-            (riverHorizontalComponent + horizontalSpeed) + Time.deltaTime * Vector3.up * riverSpeed;
+            (riverHorizontalComponent + horizontalSpeed) + Time.deltaTime * Vector3.up * currentSpeed;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
+    
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Cheese")) {
+        if (other.gameObject.tag == "Cheese") {
             scoreManager.GetComponent<Score>().addCheese();
             Destroy(other.gameObject);
-        } else if (other.CompareTag("Obstacle")) {
+        } else if (other.gameObject.tag == "Obstacle") {
             movementEnabled = false;
             gameManager.GetComponent<GameManagerScript>().EndGame();
-        } else if (other.CompareTag("Riverbank")) {
+        } else if (other.gameObject.tag == "Riverbank") {
             //Debug.Log("Riverbank");
         }
     }
+
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     Debug.Log("Triiger enter: " + other.gameObject.tag);
+    //     if (other.gameObject.tag == "Riverbank") {
+    //         currentSpeed = rapidSpeed;
+    //     }
+    // }
 }

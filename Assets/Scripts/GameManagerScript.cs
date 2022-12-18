@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManagerScript : MonoBehaviour
 {
 
     public GameObject scoreUI;

@@ -508,9 +508,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8243448842116114220, guid: 94a2fab5c9587544a8bf45b92a1e7815, type: 3}
+      propertyPath: rapidSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243448842116114220, guid: 94a2fab5c9587544a8bf45b92a1e7815, type: 3}
+      propertyPath: riverSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243448842116114220, guid: 94a2fab5c9587544a8bf45b92a1e7815, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1639762954}
+    - target: {fileID: 8243448842116114220, guid: 94a2fab5c9587544a8bf45b92a1e7815, type: 3}
+      propertyPath: raftCollider
+      value: 
+      objectReference: {fileID: 2074902397}
     - target: {fileID: 8243448842116114220, guid: 94a2fab5c9587544a8bf45b92a1e7815, type: 3}
       propertyPath: scoreManager
       value: 
@@ -1735,3 +1747,8 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!61 &2074902397 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8243448842116114221, guid: 94a2fab5c9587544a8bf45b92a1e7815, type: 3}
+  m_PrefabInstance: {fileID: 673845097}
+  m_PrefabAsset: {fileID: 0}
