@@ -75,7 +75,7 @@ public class RaftScript : MonoBehaviour
             Destroy(other.gameObject);
         } else if (other.CompareTag("Obstacle")) {
             movementEnabled = false;
-            gameManager.GetComponent<GameManager>().EndGame();
+            gameManager.GetComponent<GameManagerScript>().EndGame();
         } else if (other.CompareTag("Riverbank")) {
             //Debug.Log("Riverbank");
         }
