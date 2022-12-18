@@ -436,7 +436,7 @@ MonoBehaviour:
   - {fileID: 7743443522210470752, guid: 02a5fa540be857d4e9eaeb155eb2ed0a, type: 3}
   - {fileID: 7743443522210470752, guid: 992d9c493049ad84495f9e912178ea77, type: 3}
   - {fileID: 7743443522210470752, guid: 301759140ee368e4e8f23dbe14990ba5, type: 3}
-  obstacleTries: 4
+  obstacleTries: 2
   spawnWidthRange: 10.5
   obstacleRate: 0.85
   obstacleHeightVariation: 0.4
