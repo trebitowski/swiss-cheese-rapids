@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raftRigidBody: {fileID: 8243448842116114222}
-  moveStrength: 6.5
+  moveStrength: 16.42
   maxAngle: 40
   angleStrength: 140
   returnAngleStrength: 90
