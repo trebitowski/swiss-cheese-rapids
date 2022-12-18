@@ -24,6 +24,7 @@ public class ProceduralRiver : MonoBehaviour
     void Generation(){
         float edgeDist;
         float offset = 15;
+        waterArray = new GameObject[riverLength + 1];
         Vector2 waterPos, waterEdge;
         for (int ind = 0; ind <= riverLength; ind++)
         {
@@ -33,7 +34,7 @@ public class ProceduralRiver : MonoBehaviour
             waterEdge = waterPos + riverFuntionPerp(edgeDist);
 
             // first river side
-            spawnObj(water, waterEdge.x, waterEdge.y);
+            waterArray[ind] = spawnObj(water, waterEdge.x, waterEdge.y);
         }
     }
 
