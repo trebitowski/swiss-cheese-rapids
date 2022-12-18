@@ -9,6 +9,8 @@ public class RaftScript : MonoBehaviour
     public float maxAngle = 60;
     public float angleStrength;
     public float returnAngleStrength;
+    public float targetAngle = 0;
+    public float riverSpeed = 8;
     float rotateBack = 0f;
     float angle = 0f;
     // Start is called before the first frame update
@@ -33,15 +35,15 @@ public class RaftScript : MonoBehaviour
 
         float input = occupied == true ? Input.GetAxis("Horizontal") : 0;
         angle += input * Time.deltaTime * angleStrength;
-        angle = Mathf.Clamp(angle, -maxAngle, maxAngle);
+        angle = Mathf.Clamp(angle, -maxAngle + targetAngle, maxAngle + targetAngle);
 
         
-        if (input == 0 && angle != 0f){
+        if (input == 0 && angle != targetAngle){
             angle += rotateBack * Time.deltaTime;
-            if (Mathf.Abs(angle) < 1) {
-                angle = 0;
+            if (Mathf.Abs(targetAngle - angle) < 1) {
+                angle = targetAngle;
             }
-            if (angle > 0) {
+            if (angle > targetAngle) {
                 rotateBack = -returnAngleStrength;
             } else {
                 rotateBack = returnAngleStrength;
@@ -49,9 +51,12 @@ public class RaftScript : MonoBehaviour
         }
         transform.rotation = Quaternion.Euler(0f, 0f, -angle);
         
-        float normalizedAngle = Mathf.InverseLerp(-maxAngle, maxAngle, angle);
+        float normalizedAngle = Mathf.InverseLerp(-maxAngle + targetAngle, maxAngle + targetAngle, angle);
         float horizontalSpeed = Mathf.Lerp(-moveStrength, moveStrength, normalizedAngle);
 
-        transform.position = transform.position + Vector3.right * horizontalSpeed * Time.deltaTime;// + Vector3.up * Time.deltaTime * 2;
+        float riverHorizontalComponent = riverSpeed * Mathf.Sin(Mathf.Deg2Rad * targetAngle);
+
+        transform.position = transform.position + Time.deltaTime * Vector3.right * 
+            (riverHorizontalComponent + horizontalSpeed);
     }
 }
