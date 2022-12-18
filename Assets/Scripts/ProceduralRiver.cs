@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ProceduralRiver : MonoBehaviour
 {
-    private float perlinFreq = 0.065f; // frequency of perlin noise
-    private float perlinAmp = 15;  // amplitude of perlin noise
-    private float riverWid = 20;  // approximate rive width
-    private float riverLength = 35;
+    private float perlinFreq = 0.008f; // frequency of perlin noise
+    private float perlinAmp = 5;  // amplitude of perlin noise
+    private int riverLength = 201;
+    private float t;
+    GameObject[] waterArray;
+
     [SerializeField] GameObject water;
     // Start is called before the first frame update
     void Start(){
@@ -20,31 +22,24 @@ public class ProceduralRiver : MonoBehaviour
     }
 
     void Generation(){
-        float edgeDist1, edgeDist2;
-        float t = 0;
-        float stepSz = 0.5f;
+        float edgeDist;
         float offset = 15;
-        Vector2 waterPos, waterEdge1, waterEdge2;
-        for (int ind = 0; ind <= (int)(riverLength/stepSz); ind++)
+        Vector2 waterPos, waterEdge;
+        for (int ind = 0; ind <= riverLength; ind++)
         {
+            t = (float)ind;
             waterPos = riverFuntion(t);
-            edgeDist1 = -riverWid/2.0f + perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 5000.0f) - 0.5f)*2.0f; // dist from river center to first river edge
-            edgeDist2 = riverWid/2.0f + perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 5000.0f) - 0.5f)*2.0f; // dist from river center to second river edge
-            waterEdge1 = waterPos + riverFuntionPerp(edgeDist1);
-            waterEdge2 = waterPos + riverFuntionPerp(edgeDist2);
+            edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 5000.0f) - 0.5f)*2.0f; // dist from river center to first river edge
+            waterEdge = waterPos + riverFuntionPerp(edgeDist);
 
             // first river side
-            spawnObj(water, (int)waterEdge1.x, (int)waterEdge1.y);
-            // second river side
-            spawnObj(water, (int)waterEdge2.x, (int)waterEdge2.y);
-
-            t = t + stepSz;
+            spawnObj(water, waterEdge.x, waterEdge.y);
         }
     }
 
     // Spawn an instance of the game object
-    GameObject spawnObj(GameObject obj, int width, int height){
-        GameObject objInst = Instantiate(obj, new Vector2(width, height), Quaternion.identity);
+    GameObject spawnObj(GameObject obj, float width, float height){
+        GameObject objInst = Instantiate(obj, new Vector2(width, 0.1f*height), Quaternion.identity);
         objInst.transform.parent = this.transform;
         return objInst;
     }

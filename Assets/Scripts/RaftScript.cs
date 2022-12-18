@@ -40,9 +40,9 @@ public class RaftScript : MonoBehaviour
         
         if (input == 0 && angle != targetAngle){
             angle += rotateBack * Time.deltaTime;
-            if (Mathf.Abs(targetAngle - angle) < 1) {
-                angle = targetAngle;
-            }
+            // if (Mathf.Abs(targetAngle - angle) < 1) {
+            //     angle = targetAngle;
+            // }
             if (angle > targetAngle) {
                 rotateBack = -returnAngleStrength;
             } else {
