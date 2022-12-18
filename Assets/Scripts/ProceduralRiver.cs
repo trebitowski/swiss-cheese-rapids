@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProceduralRiver : MonoBehaviour
 {
     private float perlinFreq = 0.008f; // frequency of perlin noise
-    private float perlinAmp = 5;  // amplitude of perlin noise
+    private float perlinAmp = 4;  // amplitude of perlin noise
     private int riverLength = 210;
     private float t;
     private float startTime;
@@ -50,9 +50,9 @@ public class ProceduralRiver : MonoBehaviour
             t += 1.0f;
             // add top layer of water
             Vector2 waterPos = riverFuntion(t);
-            float edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 5000.0f) - 0.5f)*2.0f; // dist from river center to first river edge
+            float edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 0.25f*perlinFreq*t) - 0.5f)*2.0f; // dist from river center to first river edge
             waterEdge = waterPos + riverFuntionPerp(edgeDist);
-            spawnObj(water, waterEdge.x, waterEdge.y/unit_height);
+            spawnObj(water, (float)((int)(waterEdge.x*10.0f))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
         }
     }
 
@@ -64,11 +64,11 @@ public class ProceduralRiver : MonoBehaviour
         {
             t = (float)ind;
             waterPos = riverFuntion(t);
-            edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 5000.0f) - 0.5f)*2.0f; // dist from river center to first river edge
+            edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 0.25f*perlinFreq*t) - 0.5f)*2.0f; // dist from river center to first river edge
             waterEdge = waterPos + riverFuntionPerp(edgeDist);
 
             // first river side
-            spawnObj(water, waterEdge.x, waterEdge.y/unit_height);
+            spawnObj(water, (float)((int)(waterEdge.x*10.0f))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
         }
     }
 
