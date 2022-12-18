@@ -5,6 +5,9 @@ using UnityEngine;
 public class RaftScript : MonoBehaviour
 {
     public Rigidbody2D raftRigidBody;
+    public GameObject scoreManager;
+    public GameObject gameManager;
+    bool movementEnabled = true;
     public float moveStrength;
     public float maxAngle = 60;
     public float angleStrength;
@@ -22,6 +25,7 @@ public class RaftScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (movementEnabled == true) {
         bool occupied = false;
         GameObject player;
          foreach (Transform child in transform)
@@ -61,17 +65,19 @@ public class RaftScript : MonoBehaviour
 
         transform.position = transform.position + Time.deltaTime * Vector3.right * 
             (riverHorizontalComponent + horizontalSpeed) + Time.deltaTime * Vector3.up * riverSpeed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Enter");
         if (other.CompareTag("Cheese")) {
-            Debug.Log("Cheese");
+            scoreManager.GetComponent<Score>().addCheese();
+            Destroy(other.gameObject);
         } else if (other.CompareTag("Obstacle")) {
-            Debug.Log("Obstacle");
+            movementEnabled = false;
+            gameManager.GetComponent<GameManager>().EndGame();
         } else if (other.CompareTag("Riverbank")) {
-            Debug.Log("Riverbank");
+            //Debug.Log("Riverbank");
         }
     }
 }
