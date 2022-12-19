@@ -36,14 +36,24 @@ public class AudioManager : MonoBehaviour
         Play("Music");
     }
 
-    public void Play(string name) {
-        Sound s = Array.Find(sounds, sound => sound.Name == name);
+    public static void Play(string name) {
+        Sound s = Array.Find(instance.sounds, sound => sound.Name == name);
         if (s == null) { return; }
 
-        float volumeScale = soundVolume;
-        if (s.isMusic) { volumeScale = musicVolume; }
+        float volumeScale = instance.soundVolume;
+        if (s.isMusic) { volumeScale = instance.musicVolume; }
         s.source.volume = s.volume * volumeScale;
         s.source.Play();
+    }
+
+    public static void Play(string name, float delay) {
+        Sound s = Array.Find(instance.sounds, sound => sound.Name == name);
+        if (s == null) { return; }
+
+        float volumeScale = instance.soundVolume;
+        if (s.isMusic) { volumeScale = instance.musicVolume; }
+        s.source.volume = s.volume * volumeScale;
+        s.source.PlayDelayed(delay);
     }
 
     public void AddListeners() {

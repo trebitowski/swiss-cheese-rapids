@@ -8,6 +8,11 @@ public class RaftScript : MonoBehaviour
     public GameObject scoreManager;
     public GameObject gameManager;
     public Collider2D raftCollider;
+    public Sprite normal;
+    public Sprite left;
+    public Sprite right;
+    public Sprite crash;
+    public SpriteRenderer spriteRenderer;
     bool movementEnabled = true;
     public float moveStrength;
     public float maxAngle = 60;
@@ -48,6 +53,13 @@ public class RaftScript : MonoBehaviour
          }
 
         float input = occupied == true ? Input.GetAxis("Horizontal") : 0;
+        if (input == 0) {
+            spriteRenderer.sprite = normal;
+        } else if (input > 0) {
+            spriteRenderer.sprite = right;
+        } else {
+            spriteRenderer.sprite = left;
+        }
         angle += input * Time.deltaTime * angleStrength;
         angle = Mathf.Clamp(angle, -maxAngle + targetAngle, maxAngle + targetAngle);
 
@@ -82,11 +94,14 @@ public class RaftScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Cheese") {
             scoreManager.GetComponent<Score>().addCheese();
-            FindObjectOfType<AudioManager>().Play("Cheese");
+            AudioManager.Play("Cheese");
             Destroy(other.gameObject);
         } else if (other.gameObject.tag == "Obstacle") {
             movementEnabled = false;
-            FindObjectOfType<AudioManager>().Play("Splash");
+            spriteRenderer.sprite = crash;
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            AudioManager.Play("Splash");
+            AudioManager.Play("Death", 1f);
             gameManager.GetComponent<GameManagerScript>().EndGame();
         } else if (other.gameObject.tag == "Riverbank") {
             //Debug.Log("Riverbank");

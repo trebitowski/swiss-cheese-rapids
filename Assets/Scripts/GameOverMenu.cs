@@ -14,4 +14,8 @@ public class GameOverMenu : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void PlayButtonSound() {
+        AudioManager.Play("Button");
+    }
 }
