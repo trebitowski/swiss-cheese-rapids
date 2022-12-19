@@ -16,6 +16,13 @@ public class Score : MonoBehaviour
     public static float speedDifficulty = 0;
     public static float spawnDifficulty = 1;
     public static int spawnTries = 1;
+
+    void Start() {
+        speedDifficulty = 0;
+        spawnDifficulty = 1;
+        spawnTries = 1;
+    }
+    
     // Update is called once per frame
     void Update()
     {
