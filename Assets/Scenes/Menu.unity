@@ -6147,10 +6147,10 @@ MonoBehaviour:
   scale: {x: 0.5, y: 1}
   speed: {x: 125, y: 250}
   transparency: {x: 0.9, y: 0.6}
-  positon: {x: -1000, y: 2000}
+  positon: {x: -300, y: 1400}
   angle: {x: 0, y: 0}
   y: 1500
-  spawnChance: 0.24
+  spawnChance: 0.09
 --- !u!1 &1943525961
 GameObject:
   m_ObjectHideFlags: 0

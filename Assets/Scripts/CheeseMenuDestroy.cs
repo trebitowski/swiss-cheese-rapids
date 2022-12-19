@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheeseMenuDestroy : MonoBehaviour
 {
-    private float destroyZone = -900;
+    public float destroyZone = -750;
 
     private RectTransform rect;
 

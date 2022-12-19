@@ -18,7 +18,7 @@ public class CheeseSpawnScript : MonoBehaviour
     void Update()
     {
         if (timer < spawnRate) {
-            timer += Time.deltaTime;
+            timer += Time.fixedDeltaTime;
         } else {
             spawnCheese();      
             timer = Random.Range(0, 2);

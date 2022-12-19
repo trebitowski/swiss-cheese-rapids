@@ -20,7 +20,7 @@ public class RaftScript : MonoBehaviour
     public float returnAngleStrength;
     public float targetAngle = 0;
     public float riverSpeed = 8f;
-    public static float rapidSpeed = 12f;
+    public static float rapidSpeed = 12.0f;
     // public float currentSpeed;
     float rotateBack = 0f;
     LayerMask riverMask;
