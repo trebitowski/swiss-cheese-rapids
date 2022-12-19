@@ -808,7 +808,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -832,7 +832,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341839095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 8.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1857,6 +1857,9 @@ MonoBehaviour:
   - {fileID: 7743443522210470752, guid: 992d9c493049ad84495f9e912178ea77, type: 3}
   - {fileID: 7743443522210470752, guid: 301759140ee368e4e8f23dbe14990ba5, type: 3}
   - {fileID: 5941497576995536902, guid: 4395ff70fec9b3a41a2e925fa5ce30aa, type: 3}
+  - {fileID: 4778129636078800027, guid: 91633291e48f02060b72bcc54955652b, type: 3}
+  - {fileID: 4778129636078800027, guid: 91633291e48f02060b72bcc54955652b, type: 3}
+  - {fileID: 4778129636078800027, guid: 91633291e48f02060b72bcc54955652b, type: 3}
   sieves:
   - {fileID: 7153970372394830467, guid: 3ae37441aa13455419e21a9d1c584451, type: 3}
   - {fileID: 9175419545560424610, guid: 43756a5204ebd3c4d9f75ca4a63989f1, type: 3}

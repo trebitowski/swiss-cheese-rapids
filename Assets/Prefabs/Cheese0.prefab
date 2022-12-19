@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3276121697671477107}
   - component: {fileID: 5603990507445829385}
-  - component: {fileID: 2271467877421042007}
   - component: {fileID: 2382574549664243459}
   - component: {fileID: 1119415252192556805}
   - component: {fileID: -83781577248705947}
+  - component: {fileID: 2271467877421042007}
+  - component: {fileID: -89690314527725234}
   m_Layer: 0
   m_Name: Cheese0
   m_TagString: Cheese
@@ -88,22 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2271467877421042007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8419197057517734260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5d79b11e457eca4d84e7b581d392a19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  riverSpeed: 2
-  rapidSpeed: 3
-  destroyZone: -12
-  cheeseCollider: {fileID: 1119415252192556805}
 --- !u!95 &2382574549664243459
 Animator:
   serializedVersion: 4
@@ -161,3 +146,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2271467877421042007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8419197057517734260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d79b11e457eca4d84e7b581d392a19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  riverSpeed: 2
+  rapidSpeed: 3
+  floatCollider: {fileID: 1119415252192556805}
+--- !u!114 &-89690314527725234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8419197057517734260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae470013746e9c428986c4813fb93cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyZone: -12

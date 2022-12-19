@@ -2722,6 +2722,13 @@ MonoBehaviour:
     isMusic: 0
     loop: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 436bf80278b2dcc33adde51792aff080, type: 3}
+    Name: Log bump
+    volume: 0.75
+    pitch: 0.45
+    isMusic: 0
+    loop: 0
+    source: {fileID: 0}
   soundVolume: 0.5
   musicVolume: 0.5
   soundSlider: {fileID: 1661142098}

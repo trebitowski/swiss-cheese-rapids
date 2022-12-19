@@ -107,12 +107,10 @@ public class RaftScript : MonoBehaviour
             //Debug.Log("Riverbank");
         }
     }
-
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     Debug.Log("Triiger enter: " + other.gameObject.tag);
-    //     if (other.gameObject.tag == "Riverbank") {
-    //         currentSpeed = rapidSpeed;
-    //     }
-    // }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.name == "Log0(Clone)") {
+            AudioManager.Play("Log bump");
+        }
+    }
 }
