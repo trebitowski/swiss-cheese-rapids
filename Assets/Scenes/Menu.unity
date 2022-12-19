@@ -214,7 +214,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Colin Skinner / CollyPark
+  m_text: 'Colin Skinner / @CollyPark
 
 '
   m_isRightToLeft: 0
