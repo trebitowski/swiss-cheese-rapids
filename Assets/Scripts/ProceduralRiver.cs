@@ -20,6 +20,7 @@ public class ProceduralRiver : MonoBehaviour
     public GameObject[] sieves;
 
     public float sieveChance = 0.05f;
+    private int sieveCounter = 0;
     public int obstacleTries;
     public float spawnWidthRange; // the total range of the spawnable width of the river
     Vector2 waterEdge;
@@ -34,7 +35,7 @@ public class ProceduralRiver : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         Generation();
-        obstacleTimer = obstacleRate; // spawn obstacles right away
+        //obstacleTimer = obstacleRate; // spawn obstacles right away
     }
 
     // Update is called once per frame
@@ -60,7 +61,11 @@ public class ProceduralRiver : MonoBehaviour
 
                   
             if (obstacleTimer > Mathf.Lerp(obstacleRate, maxObstacleRate, Score.spawnDifficulty)) {
-                if (Random.value < sieveChance) { spawnSieve(waterEdge.x, waterEdge.y/unit_height); } else {
+                if (sieveCounter <= 0 && Random.value < sieveChance) { 
+                    spawnSieve(waterEdge.x, waterEdge.y/unit_height); 
+                    sieveCounter = 5;
+                } else {
+                    sieveCounter--;
                  int count = Random.Range(1, Score.spawnTries + 1);
                 List<float> positions = new List<float>();
                 for (int i = 0; i < count; i++)
