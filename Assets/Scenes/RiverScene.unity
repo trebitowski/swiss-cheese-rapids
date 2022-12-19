@@ -1350,7 +1350,7 @@ MonoBehaviour:
   - {fileID: 7743443522210470752, guid: 301759140ee368e4e8f23dbe14990ba5, type: 3}
   - {fileID: 5941497576995536902, guid: 4395ff70fec9b3a41a2e925fa5ce30aa, type: 3}
   obstacleTries: 2
-  spawnWidthRange: 10.5
+  spawnWidthRange: 10
   obstacleRate: 0.85
   maxObstacleRate: 0.4
   obstacleHeightVariation: 0.4

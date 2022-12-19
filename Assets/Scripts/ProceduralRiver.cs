@@ -80,9 +80,23 @@ public class ProceduralRiver : MonoBehaviour
                   
             if (obstacleTimer > Mathf.Lerp(obstacleRate, maxObstacleRate, Score.spawnDifficulty)) {
                  int count = Random.Range(1, Score.spawnTries + 1);
+                List<float> positions = new List<float>();
                 for (int i = 0; i < count; i++)
                 {
-                    spawnObstacle(waterEdge.x, Random.Range(waterEdge.y/unit_height - obstacleHeightVariation, waterEdge.y/unit_height + obstacleHeightVariation));   
+                    float newPosition = Random.Range(waterEdge.x - spawnWidthRange, waterEdge.x + spawnWidthRange);
+                    bool valid = true;
+                    foreach (float position in positions) {
+                        if (Mathf.Abs(position - newPosition) < 3) {
+                            valid = false;
+                        }
+                    }
+                    if (valid == true) {
+                        positions.Add(newPosition);
+                    }
+                } 
+                foreach (float position in positions)
+                {
+                    spawnObstacle(position, Random.Range(waterEdge.y/unit_height - obstacleHeightVariation, waterEdge.y/unit_height + obstacleHeightVariation));   
                 } 
                 obstacleTimer = Random.Range(0, 0.5f);
             }
@@ -146,7 +160,7 @@ public class ProceduralRiver : MonoBehaviour
     }
 
     void spawnObstacle(float width, float height){
-        GameObject objInst = Instantiate(obstacles[Random.Range(0,obstacles.Length)], new Vector2(Random.Range(width - spawnWidthRange, width + spawnWidthRange), height), Quaternion.identity);
+        GameObject objInst = Instantiate(obstacles[Random.Range(0,obstacles.Length)], new Vector2(width, height), Quaternion.identity);
         objInst.transform.parent = this.transform;
     }
 }
