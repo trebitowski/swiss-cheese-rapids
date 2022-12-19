@@ -82,9 +82,11 @@ public class RaftScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Cheese") {
             scoreManager.GetComponent<Score>().addCheese();
+            FindObjectOfType<AudioManager>().Play("Cheese");
             Destroy(other.gameObject);
         } else if (other.gameObject.tag == "Obstacle") {
             movementEnabled = false;
+            FindObjectOfType<AudioManager>().Play("Splash");
             gameManager.GetComponent<GameManagerScript>().EndGame();
         } else if (other.gameObject.tag == "Riverbank") {
             //Debug.Log("Riverbank");
