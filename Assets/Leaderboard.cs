@@ -41,14 +41,15 @@ public class Leaderboard : MonoBehaviour
 
     public static void RefreshLeaderboard() {
         instance.StartCoroutine(instance.FetchTopHighscoresRoutine());
+        instance.StartCoroutine(instance.FetchUserHighscoreRoutine());
     }
     public IEnumerator FetchTopHighscoresRoutine() {
         bool done = false;
         LootLockerSDKManager.GetScoreList(leaderboardKey, 10, 0, (response) => {
             if (response.success) {
                 Debug.Log("leaderboard received");
-                string tempPlayerNames = "Name\n";
-                string tempPlayerScores = "Score\n";
+                string tempPlayerNames = "name\n";
+                string tempPlayerScores = "score\n";
 
                 LootLockerLeaderboardMember[] members = response.items;
 
@@ -69,6 +70,41 @@ public class Leaderboard : MonoBehaviour
                         texts[i].text = tempPlayerNames;
                     } else if (texts[i].name == "leaderboardScores") {
                         texts[i].text = tempPlayerScores;
+                    }
+                }             
+                done = true;
+            } else {
+                Debug.Log("error fetching leaderboard" + response);
+                done = true;
+            }
+        });
+        yield return new WaitWhile(() => done == false);
+    }
+
+    public IEnumerator FetchUserHighscoreRoutine() {
+        bool done = false;
+        string playerID = PlayerPrefs.GetString("PlayerID");
+        LootLockerSDKManager.GetMemberRank(leaderboardKey, playerID, (response) => {
+            if (response.success) {
+                Debug.Log("leaderboard received");
+                string tempPlayerName = "";
+                string tempPlayerScore = "";
+
+
+                    tempPlayerName += response.rank + ". ";
+                    if (response.player.name != "") {
+                        tempPlayerName += response.player.name;
+                    } else {
+                        tempPlayerName += playerID;
+                    }
+                    tempPlayerScore += response.score;
+
+                TextMeshProUGUI[] texts = FindObjectsOfType<TextMeshProUGUI>();
+                for (int i = 0; i < texts.Length; i++) {
+                    if (texts[i].name == "userLeaderboardName") {
+                        texts[i].text = tempPlayerName;
+                    } else if (texts[i].name == "userLeaderboardScore") {
+                        texts[i].text = tempPlayerScore;
                     }
                 }             
                 done = true;

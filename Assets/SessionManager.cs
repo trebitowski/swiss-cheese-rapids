@@ -35,6 +35,7 @@ public class SessionManager : MonoBehaviour
     public IEnumerator SetupRoutine() {
         yield return LoginRoutine();
         yield return leaderboard.FetchTopHighscoresRoutine();
+        yield return leaderboard.FetchUserHighscoreRoutine();
     }
 
     IEnumerator LoginRoutine() {
