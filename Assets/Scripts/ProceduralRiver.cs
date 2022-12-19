@@ -31,30 +31,7 @@ public class ProceduralRiver : MonoBehaviour
     void Start(){
         Generation();
         obstacleTimer = obstacleRate; // spawn obstacles right away
-        //startTime = Time.time;
     }
-
-    // Update is called once per frame
-    // void Update(){
-    //     float offset = 15;
-    //     float timeOffset;
-    //     int layercount;
-    //     // wait some deltaTime
-    //     if (Time.time - startTime >= 1.0f/(unit_height*speed))
-    //     {
-    //         timeOffset = Time.time - startTime - 1.0f/(unit_height*speed);
-    //         t += 1.0f;
-    //         // add top layer of water
-    //         Vector2 waterPos = riverFuntion(t);
-    //         float edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 5000.0f) - 0.5f)*2.0f; // dist from river center to first river edge
-    //         Vector2 waterEdge = waterPos + riverFuntionPerp(edgeDist);
-    //         layercount = transform.childCount;
-    //         Transform lastChild = transform.GetChild(layercount-1);
-    //         spawnObj(water, waterEdge.x, (int)(lastChild.position.y + 0.1f));
-    //         startTime = startTime + 1.0f/(unit_height*speed);
-    //     }
-    // }
-
 
     // Update is called once per frame
     void Update(){
