@@ -6,7 +6,7 @@ public class ProceduralRiver : MonoBehaviour
 {
     private float perlinFreq = 0.008f; // frequency of perlin noise
     private float perlinAmp = 4;  // amplitude of perlin noise
-    private int riverLength = 210;
+    private int riverLength = 600;
     private float t;
     private float startTime;
     public float speed; // units per second
@@ -70,16 +70,12 @@ public class ProceduralRiver : MonoBehaviour
                     }
                     if (valid == true) {
                         positions.Add(newPosition);
+                        spawnObstacle(newPosition, Random.Range(waterEdge.y/unit_height - obstacleHeightVariation, waterEdge.y/unit_height + obstacleHeightVariation));   
                     }
-                } 
-                foreach (float position in positions)
-                {
-                    spawnObstacle(position, Random.Range(waterEdge.y/unit_height - obstacleHeightVariation, waterEdge.y/unit_height + obstacleHeightVariation));   
-                } 
+                }
                 obstacleTimer = Random.Range(0, 0.5f);
             }
 
-            
             if (cheeseTimer > Mathf.Lerp(cheeseRate, maxCheeseRate, Score.spawnDifficulty)) {
                 spawnCheese(waterEdge.x, waterEdge.y/unit_height);    
                 cheeseTimer = Random.Range(0, cheeseTimer);
@@ -135,7 +131,13 @@ public class ProceduralRiver : MonoBehaviour
     }
 
     void spawnObstacle(float width, float height){
-        GameObject objInst = Instantiate(obstacles[Random.Range(0,obstacles.Length)], new Vector2(width, height), Quaternion.identity);
+        int ind = Random.Range(0,obstacles.Length);
+        Quaternion rotation = Quaternion.identity;
+        // check if its a log
+       if (obstacles[ind].name == "Log0") {
+            rotation = Quaternion.AngleAxis(Random.Range(-90,90), Vector3.forward);
+        }
+        GameObject objInst = Instantiate(obstacles[ind], new Vector2(width, height), rotation);
         objInst.transform.parent = this.transform;
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9033785270620430973}
   - component: {fileID: 8484771379516341675}
-  - component: {fileID: -4381382415704380228}
+  - component: {fileID: -2529549752474462711}
   m_Layer: 0
   m_Name: bank_left
   m_TagString: Riverbank
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-4381382415704380228
+--- !u!114 &-2529549752474462711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,8 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6441146628037933866}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce673d5844e7f96b89e104e0cbf444d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ae470013746e9c428986c4813fb93cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
   destroyZone: -12
