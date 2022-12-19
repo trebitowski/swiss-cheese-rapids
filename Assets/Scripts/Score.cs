@@ -23,6 +23,8 @@ public class Score : MonoBehaviour
     public static int spawnTries = 1;
     public static int sieveDifficulty = 0;
 
+    public int totalScore;
+
     void Start() {
         speedDifficulty = 0;
         spawnDifficulty = 1;
@@ -43,7 +45,7 @@ public class Score : MonoBehaviour
         cheeseGameOverText.text = numberCheese.ToString();
         distanceGameOverText.text = distanceScore.ToString();
 
-        int totalScore = (int)(numberCheese * scorePerCheese) + distanceScore;
+        totalScore = (int)(numberCheese * scorePerCheese) + distanceScore;
         scoreGameOverText.text =  totalScore.ToString();
         speedDifficulty = ((int)(distanceScore / speedDifficultyStep)) / 2.0f;
         spawnDifficulty = Mathf.InverseLerp(0, maxSpawnRateAtDistance, distanceScore);
