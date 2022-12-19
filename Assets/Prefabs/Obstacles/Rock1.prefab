@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 3316799009709375771}
   - component: {fileID: 474744633588308359}
   - component: {fileID: 1080995323693756391}
-  - component: {fileID: 226130636639741681}
+  - component: {fileID: 5777654558064910565}
+  - component: {fileID: 470280391650280323}
   m_Layer: 0
-  m_Name: Rock
-  m_TagString: Untagged
+  m_Name: Rock1
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4d60ed91d01bf0442bff75acbd2fe795, type: 3}
+  m_Sprite: {fileID: 349187335, guid: 06adb27729411a84595e319cc3e4c046, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,8 +101,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.8, y: 0.6}
+  m_Offset: {x: 0, y: -0.1}
+  m_Size: {x: 1.6, y: 1.2}
   m_Direction: 1
 --- !u!114 &1080995323693756391
 MonoBehaviour:
@@ -117,21 +118,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   destroyZone: -12
---- !u!114 &226130636639741681
-MonoBehaviour:
+--- !u!95 &5777654558064910565
+Animator:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7743443522210470752}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf7122d863fe524f90665ee45d84141, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 3316799009709375771}
-  sprites:
-  - {fileID: 21300000, guid: 4d60ed91d01bf0442bff75acbd2fe795, type: 3}
-  - {fileID: 21300000, guid: 92351705393365a43a75be7f2b6ac8c0, type: 3}
-  - {fileID: 21300000, guid: d2b7b03e4add3b642a506c4d093c4997, type: 3}
-  - {fileID: 21300000, guid: f1c29fdaf36f2c14ba1e713b932bb096, type: 3}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1404a238859ea094e934b70e041dfbf7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &470280391650280323
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7743443522210470752}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

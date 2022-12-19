@@ -3,12 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Cheese
+  - Obstacle
+  - Riverbank
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - River
   - Water
   - UI
   - 
