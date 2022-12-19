@@ -3617,7 +3617,7 @@ MonoBehaviour:
   sounds:
   - clip: {fileID: 8300000, guid: 48bb8ffce5715fd43b10f423b096ffc0, type: 3}
     Name: Music
-    volume: 0.5
+    volume: 0.25
     pitch: 1
     isMusic: 1
     loop: 1
@@ -6150,7 +6150,7 @@ MonoBehaviour:
   positon: {x: -1000, y: 2000}
   angle: {x: 0, y: 0}
   y: 1500
-  spawnChance: 0.02
+  spawnChance: 0.24
 --- !u!1 &1943525961
 GameObject:
   m_ObjectHideFlags: 0
