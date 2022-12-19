@@ -4,7 +4,8 @@ using UnityEngine;
 using TMPro;
 public class Score : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI cheeseText;
+    public TextMeshProUGUI distanceText;
     public GameObject scoreCamera;
     public float scorePerDistance;
     public int scorePerCheese;
@@ -22,13 +23,14 @@ public class Score : MonoBehaviour
         spawnDifficulty = 1;
         spawnTries = 1;
     }
-    
+
     // Update is called once per frame
     void Update()
     {
         int distanceScore = (int)(scoreCamera.transform.position.y * scorePerDistance);
-        int score = (int)(scorePerCheese * numberCheese) + distanceScore;
-        scoreText.text = score.ToString();
+        // int score = (int)(scorePerCheese * numberCheese) + distanceScore;
+        cheeseText.text = numberCheese.ToString();
+        distanceText.text = distanceScore.ToString();
 
         speedDifficulty = ((int)(distanceScore / speedDifficultyStep)) / 2.0f;
         spawnDifficulty = Mathf.InverseLerp(0, maxSpawnRateAtDistance, distanceScore);
