@@ -1109,6 +1109,10 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 2.7
       objectReference: {fileID: 0}
+    - target: {fileID: 8243448842116114222, guid: 94a2fab5c9587544a8bf45b92a1e7815, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8243448842116114223, guid: 94a2fab5c9587544a8bf45b92a1e7815, type: 3}
       propertyPath: m_Name
       value: Raft
