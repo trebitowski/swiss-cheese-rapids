@@ -18,6 +18,7 @@ public class ProceduralRiver : MonoBehaviour
     public GameObject[] cheeses;
     public GameObject[] obstacles;
     public GameObject[] sieves;
+    public GameObject whiteCaps;
 
     public float sieveChance = 0.05f;
     private int sieveCounter = 0;
@@ -32,23 +33,29 @@ public class ProceduralRiver : MonoBehaviour
     public float cheeseRate;
     public float maxCheeseRate;
     private float cheeseTimer;
+    private float whiteCapsTimer = 0;
+    public float whiteCapsRate;
+    private float camSize = 30.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         Generation();
-        //obstacleTimer = obstacleRate; // spawn obstacles right away
+        obstacleTimer = obstacleRate; // spawn obstacles right away
     }
 
     // Update is called once per frame
     void Update()
     {
         float offset = 15;
-        float camTopPos = 40.0f + Camera.main.transform.position.y;
+        float camPos = Camera.main.transform.position.y;
+        float buffer = 40.0f;
 
         obstacleTimer += Time.deltaTime;
         cheeseTimer += Time.deltaTime;
+        whiteCapsTimer += Time.deltaTime;
 
-        if (waterEdge.y / unit_height < camTopPos)
+        if (waterEdge.y / unit_height < camPos + buffer)
         {
             t += (float)(pixel_height - 1);
             // add top layer of water
@@ -100,6 +107,20 @@ public class ProceduralRiver : MonoBehaviour
                 spawnCheese(waterEdge.x, waterEdge.y / unit_height);
                 cheeseTimer = Random.Range(0, cheeseTimer);
             }
+
+            if (whiteCapsTimer > whiteCapsRate)
+            {
+                float rapidsRadius = 11.4f/2.0f;
+                int numCaps = 1;
+                for (int i = 0; i < numCaps; i++)
+                {
+                    float xPos = Random.Range(waterPos.x - rapidsRadius, waterPos.x + rapidsRadius);
+                    float yPos = Random.Range(camPos - camSize, camPos + camSize);
+                    spawnWhiteCaps(xPos, yPos);                    
+                }
+                whiteCapsTimer = Random.Range(0, whiteCapsTimer);
+            }
+
         }
     }
 
@@ -152,6 +173,12 @@ public class ProceduralRiver : MonoBehaviour
     void spawnCheese(float width, float height)
     {
         GameObject objInst = Instantiate(cheeses[Random.Range(0, cheeses.Length)], new Vector2(Random.Range(width - spawnWidthRange, width + spawnWidthRange), height), Quaternion.identity);
+        objInst.transform.parent = this.transform;
+    }
+
+    void spawnWhiteCaps(float width, float height)
+    {
+        GameObject objInst = Instantiate(whiteCaps, new Vector2(width, height), Quaternion.identity);
         objInst.transform.parent = this.transform;
     }
 

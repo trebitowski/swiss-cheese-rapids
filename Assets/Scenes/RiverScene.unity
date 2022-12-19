@@ -766,6 +766,8 @@ GameObject:
   - component: {fileID: 341839099}
   - component: {fileID: 341839100}
   - component: {fileID: 341839101}
+  - component: {fileID: 341839103}
+  - component: {fileID: 341839102}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -883,6 +885,78 @@ MonoBehaviour:
   - {fileID: 1550076982}
   choke: 0.25
   scrollSpeed: 0
+--- !u!212 &341839102
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341839095}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &341839103
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341839095}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 78bd9e65f1ea15b6594e7ada9c66572c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &413684536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,6 +1950,7 @@ MonoBehaviour:
   - {fileID: 7153970372394830467, guid: e4af9cbfe97b41a44bc8fa91d44ac673, type: 3}
   - {fileID: 9175419545560424610, guid: ab7d9bbce3ccb8d489dbdcf34ae492e9, type: 3}
   - {fileID: 9175419545560424610, guid: e46a7bf6cdef8684d93ebe065b5b5012, type: 3}
+  whiteCaps: {fileID: 8477292878904910301, guid: de4f7b6d1c0ff4ab887ca9f23a4008f7, type: 3}
   sieveChance: 0.05
   obstacleTries: 2
   spawnWidthRange: 10
@@ -1884,6 +1959,7 @@ MonoBehaviour:
   obstacleHeightVariation: 0.4
   cheeseRate: 5
   maxCheeseRate: 2
+  whiteCapsRate: 1
 --- !u!4 &1316050310
 Transform:
   m_ObjectHideFlags: 0
