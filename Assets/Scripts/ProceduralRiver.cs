@@ -17,6 +17,7 @@ public class ProceduralRiver : MonoBehaviour
     [SerializeField] GameObject bank_right;
     public GameObject[] cheeses;
     public GameObject[] obstacles;
+    public GameObject[] treeObstacles;
     public GameObject[] sieves;
     public GameObject whiteCaps;
 
@@ -54,6 +55,9 @@ public class ProceduralRiver : MonoBehaviour
         obstacleTimer += Time.deltaTime;
         cheeseTimer += Time.deltaTime;
         whiteCapsTimer += Time.deltaTime;
+
+        bool openLeft = true;
+        bool openRight = true;
 
         if (waterEdge.y / unit_height < camPos + buffer)
         {
@@ -96,7 +100,18 @@ public class ProceduralRiver : MonoBehaviour
                         {
                             positions.Add(newPosition);
                             spawnObstacle(newPosition, Random.Range(waterEdge.y / unit_height - obstacleHeightVariation, waterEdge.y / unit_height + obstacleHeightVariation));
+                            // check openings for obstacle tree
+                            if (newPosition < waterEdge.x - spawnWidthRange + 4) {
+                                openLeft = false;
+                            }
+                            if (newPosition > waterEdge.x + spawnWidthRange - 4) {
+                                openRight = false;
+                            }
                         }
+                    }
+                    if (Random.Range(0.0f,1.0f) <= 0.6f){
+                        // spawn roughly 8% as much as other obstacles
+                        spawnObstacleTree(openLeft, openRight);
                     }
                 }
                 obstacleTimer = Random.Range(0, 0.5f);
@@ -193,6 +208,32 @@ public class ProceduralRiver : MonoBehaviour
         }
         GameObject objInst = Instantiate(obstacles[ind], new Vector2(width, height), rotation);
         objInst.transform.parent = this.transform;
+    }
+
+    void spawnObstacleTree(bool openLeft, bool openRight)
+    {
+        int ind = -1;
+        bool drawTree = false;
+        GameObject objInst;
+        if (openLeft && openRight) {
+            ind = Random.Range(0, treeObstacles.Length);
+            drawTree = true;
+        } else if (openLeft) {
+            ind = Random.Range(0,4);
+            drawTree = true;
+        } else if (openRight) {
+            ind = Random.Range(4,8);
+            drawTree = true;
+        }
+
+        if (drawTree) {
+            if (treeObstacles[ind].name == "tree_left_obs0" || treeObstacles[ind].name == "tree_left_obs1" || treeObstacles[ind].name == "tree_left0" || treeObstacles[ind].name == "tree_left1") {
+                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x - spawnWidthRange - 3.0f, waterEdge.y / unit_height), Quaternion.identity);
+            } else {
+                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x + spawnWidthRange + 3.0f, waterEdge.y / unit_height), Quaternion.identity);
+            }
+            objInst.transform.parent = this.transform;
+        }
     }
 
     void spawnSieve(float width, float height)
