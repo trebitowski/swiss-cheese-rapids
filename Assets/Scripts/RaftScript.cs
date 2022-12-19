@@ -101,7 +101,7 @@ public class RaftScript : MonoBehaviour
             spriteRenderer.sprite = crash;
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             AudioManager.Play("Splash");
-            AudioManager.Play("Death", 1f);
+            // AudioManager.Play("Death", 1f);
             gameManager.GetComponent<GameManagerScript>().EndGame();
         } else if (other.gameObject.tag == "Riverbank") {
             //Debug.Log("Riverbank");
