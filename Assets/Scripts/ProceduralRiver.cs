@@ -19,9 +19,11 @@ public class ProceduralRiver : MonoBehaviour
     Vector2 waterEdge;
 
     public float obstacleRate;
+    public float maxObstacleRate;
     private float obstacleTimer;
     public float obstacleHeightVariation;
     public float cheeseRate;
+    public float maxCheeseRate;
     private float cheeseTimer;
     // Start is called before the first frame update
     void Start(){
@@ -70,8 +72,8 @@ public class ProceduralRiver : MonoBehaviour
             spawnRiver(water, (float)((int)(waterEdge.x*10.0f))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
 
                   
-            if (obstacleTimer > obstacleRate) {
-                 int count = Random.Range(1,obstacleTries);
+            if (obstacleTimer > Mathf.Lerp(obstacleRate, maxObstacleRate, Score.spawnDifficulty)) {
+                 int count = Random.Range(1, Score.spawnTries + 1);
                 for (int i = 0; i < count; i++)
                 {
                     spawnObstacle(waterEdge.x, Random.Range(waterEdge.y/unit_height - obstacleHeightVariation, waterEdge.y/unit_height + obstacleHeightVariation));   
@@ -79,7 +81,8 @@ public class ProceduralRiver : MonoBehaviour
                 obstacleTimer = Random.Range(0, 0.5f);
             }
 
-            if (cheeseTimer > cheeseRate) {
+            
+            if (cheeseTimer > Mathf.Lerp(cheeseRate, maxCheeseRate, Score.spawnDifficulty)) {
                 spawnCheese(waterEdge.x, waterEdge.y/unit_height);    
                 cheeseTimer = Random.Range(0, cheeseTimer);
             }

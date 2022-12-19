@@ -1162,8 +1162,10 @@ MonoBehaviour:
   obstacleTries: 2
   spawnWidthRange: 10.5
   obstacleRate: 0.85
+  maxObstacleRate: 0.4
   obstacleHeightVariation: 0.4
   cheeseRate: 5
+  maxCheeseRate: 2
 --- !u!4 &1316050310
 Transform:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class GameManagerScript : MonoBehaviour
 
     public GameObject scoreUI;
     public GameObject gameOverUI;
+    
     bool gameHasEnded = false;
     public void EndGame() {
         if (gameHasEnded == false) {

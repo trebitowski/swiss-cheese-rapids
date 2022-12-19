@@ -35,7 +35,7 @@ public class CheeseScript : MonoBehaviour
             moveSpeed = rapidSpeed;
         }
 
-        transform.position = transform.position + Vector3.up * moveSpeed * Time.deltaTime;
+        transform.position = transform.position + Vector3.up * (moveSpeed + Score.speedDifficulty) * Time.deltaTime;
         if (transform.position.y < destroyZone + Camera.main.transform.position.y) {
             Destroy(gameObject);
         }
