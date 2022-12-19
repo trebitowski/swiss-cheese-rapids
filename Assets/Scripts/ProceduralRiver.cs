@@ -33,125 +33,144 @@ public class ProceduralRiver : MonoBehaviour
     public float maxCheeseRate;
     private float cheeseTimer;
     // Start is called before the first frame update
-    void Start(){
+    void Start()
+    {
         Generation();
         //obstacleTimer = obstacleRate; // spawn obstacles right away
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update()
+    {
         float offset = 15;
         float camTopPos = 40.0f + Camera.main.transform.position.y;
 
         obstacleTimer += Time.deltaTime;
         cheeseTimer += Time.deltaTime;
 
-        if (waterEdge.y/unit_height < camTopPos)
+        if (waterEdge.y / unit_height < camTopPos)
         {
             t += (float)(pixel_height - 1);
             // add top layer of water
             Vector2 waterPos = riverFuntion(t);
-            float edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t, 0.25f*perlinFreq*t) - 0.5f)*2.0f; // dist from river center to first river edge
-            float bankLeftPos = Mathf.PerlinNoise(perlinFreq*t + offset, perlinFreq*t); // dist from river center to first river edge
-            float bankRightPos = Mathf.PerlinNoise(perlinFreq*t + 2*offset, perlinFreq*t); // dist from river center to first river edge            waterEdge = waterPos + riverFuntionPerp(edgeDist);
+            float edgeDist = perlinAmp * (Mathf.PerlinNoise(perlinFreq * t, 0.25f * perlinFreq * t) - 0.5f) * 2.0f; // dist from river center to first river edge
+            float bankLeftPos = Mathf.PerlinNoise(perlinFreq * t + offset, perlinFreq * t); // dist from river center to first river edge
+            float bankRightPos = Mathf.PerlinNoise(perlinFreq * t + 2 * offset, perlinFreq * t); // dist from river center to first river edge            waterEdge = waterPos + riverFuntionPerp(edgeDist);
             waterEdge = waterPos + riverFuntionPerp(edgeDist);
-            spawnRiver(water, (float)((int)(waterEdge.x*10.0f))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
-            spawnRiver(bank_left, (float)((int)(waterEdge.x*10.0f) - Mathf.Lerp(90, 110, bankLeftPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
-            spawnRiver(bank_right, (float)((int)(waterEdge.x*10.0f) + Mathf.Lerp(90, 110, bankRightPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
+            spawnRiver(water, (float)((int)(waterEdge.x * 10.0f)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
+            spawnRiver(bank_left, (float)((int)(waterEdge.x * 10.0f) - Mathf.Lerp(90, 110, bankLeftPos)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
+            spawnRiver(bank_right, (float)((int)(waterEdge.x * 10.0f) + Mathf.Lerp(90, 110, bankRightPos)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
 
-                  
-            if (obstacleTimer > Mathf.Lerp(obstacleRate, maxObstacleRate, Score.spawnDifficulty)) {
-                if (sieveCounter <= 0 && Random.value < sieveChance) { 
-                    spawnSieve(waterEdge.x, waterEdge.y/unit_height); 
-                    sieveCounter = 5;
-                } else {
-                    sieveCounter--;
-                 int count = Random.Range(1, Score.spawnTries + 1);
-                List<float> positions = new List<float>();
-                for (int i = 0; i < count; i++)
+
+            if (obstacleTimer > Mathf.Lerp(obstacleRate, maxObstacleRate, Score.spawnDifficulty))
+            {
+                if (sieveCounter <= 0 && Random.value < sieveChance)
                 {
-                    float newPosition = Random.Range(waterEdge.x - spawnWidthRange, waterEdge.x + spawnWidthRange);
-                    bool valid = true;
-                    foreach (float position in positions) {
-                        if (Mathf.Abs(position - newPosition) < 3) {
-                            valid = false;
+                    spawnSieve(waterEdge.x, waterEdge.y / unit_height);
+                    sieveCounter = 5;
+                }
+                else
+                {
+                    sieveCounter--;
+                    int count = Random.Range(1, Score.spawnTries + 1);
+                    List<float> positions = new List<float>();
+                    for (int i = 0; i < count; i++)
+                    {
+                        float newPosition = Random.Range(waterEdge.x - spawnWidthRange, waterEdge.x + spawnWidthRange);
+                        bool valid = true;
+                        foreach (float position in positions)
+                        {
+                            if (Mathf.Abs(position - newPosition) < 3)
+                            {
+                                valid = false;
+                            }
                         }
-                    }
-                    if (valid == true) {
-                        positions.Add(newPosition);
-                        spawnObstacle(newPosition, Random.Range(waterEdge.y/unit_height - obstacleHeightVariation, waterEdge.y/unit_height + obstacleHeightVariation));   
+                        if (valid == true)
+                        {
+                            positions.Add(newPosition);
+                            spawnObstacle(newPosition, Random.Range(waterEdge.y / unit_height - obstacleHeightVariation, waterEdge.y / unit_height + obstacleHeightVariation));
+                        }
                     }
                 }
                 obstacleTimer = Random.Range(0, 0.5f);
             }
 
-            if (cheeseTimer > Mathf.Lerp(cheeseRate, maxCheeseRate, Score.spawnDifficulty)) {
-                spawnCheese(waterEdge.x, waterEdge.y/unit_height);    
+            if (cheeseTimer > Mathf.Lerp(cheeseRate, maxCheeseRate, Score.spawnDifficulty))
+            {
+                spawnCheese(waterEdge.x, waterEdge.y / unit_height);
                 cheeseTimer = Random.Range(0, cheeseTimer);
             }
         }
     }
 
-    void Generation(){
+    void Generation()
+    {
         float edgeDist;
         float offset = 15;
         Vector2 waterPos;
-        for (int ind = 0; ind < riverLength; ind += pixel_height-1)
+        for (int ind = 0; ind < riverLength; ind += pixel_height - 1)
         {
             t = (float)ind;
             waterPos = riverFuntion(t);
-            edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t, 0.25f*perlinFreq*t) - 0.5f)*2.0f; // dist from river center to first river edge
-            float bankLeftPos = Mathf.PerlinNoise(perlinFreq*t + offset, perlinFreq*t); // dist from river center to first river edge
-            float bankRightPos = Mathf.PerlinNoise(perlinFreq*t + 2*offset, perlinFreq*t); // dist from river center to first river edge
+            edgeDist = perlinAmp * (Mathf.PerlinNoise(perlinFreq * t, 0.25f * perlinFreq * t) - 0.5f) * 2.0f; // dist from river center to first river edge
+            float bankLeftPos = Mathf.PerlinNoise(perlinFreq * t + offset, perlinFreq * t); // dist from river center to first river edge
+            float bankRightPos = Mathf.PerlinNoise(perlinFreq * t + 2 * offset, perlinFreq * t); // dist from river center to first river edge
             waterEdge = waterPos + riverFuntionPerp(edgeDist);
 
             // first river side
-            spawnRiver(water, (float)((int)(waterEdge.x*10.0f))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
-            spawnRiver(bank_left, (float)((int)(waterEdge.x*10.0f) - Mathf.Lerp(90, 110, bankLeftPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
-            spawnRiver(bank_right, (float)((int)(waterEdge.x*10.0f) + Mathf.Lerp(90, 110, bankRightPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
+            spawnRiver(water, (float)((int)(waterEdge.x * 10.0f)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
+            spawnRiver(bank_left, (float)((int)(waterEdge.x * 10.0f) - Mathf.Lerp(90, 110, bankLeftPos)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
+            spawnRiver(bank_right, (float)((int)(waterEdge.x * 10.0f) + Mathf.Lerp(90, 110, bankRightPos)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
         }
     }
 
     // Spawn an instance of the game object
-    void spawnRiver(GameObject obj, float width, float height){
+    void spawnRiver(GameObject obj, float width, float height)
+    {
         GameObject objInst = Instantiate(obj, new Vector2(width, height), Quaternion.identity);
         objInst.transform.parent = this.transform;
     }
 
     // Parametric function (one input, two outputs) describing river center curve
-    Vector2 riverFuntion(float t){
+    Vector2 riverFuntion(float t)
+    {
         Vector2 pos = new Vector2();
         pos.x = 0.0f;
-        pos.y = t-riverLength/2.0f;
+        pos.y = t - riverLength / 2.0f;
         return pos;
     }
 
     // Parametric function perpendicular to the river curve
-    Vector2 riverFuntionPerp(float t){
+    Vector2 riverFuntionPerp(float t)
+    {
         Vector2 perp = new Vector2();
         perp.x = t;
         perp.y = 0;
         return perp;
     }
 
-    void spawnCheese(float width, float height){
-        GameObject objInst = Instantiate(cheeses[Random.Range(0,cheeses.Length)], new Vector2(Random.Range(width - spawnWidthRange, width + spawnWidthRange), height), Quaternion.identity);
+    void spawnCheese(float width, float height)
+    {
+        GameObject objInst = Instantiate(cheeses[Random.Range(0, cheeses.Length)], new Vector2(Random.Range(width - spawnWidthRange, width + spawnWidthRange), height), Quaternion.identity);
         objInst.transform.parent = this.transform;
     }
 
-    void spawnObstacle(float width, float height){
-        int ind = Random.Range(0,obstacles.Length);
+    void spawnObstacle(float width, float height)
+    {
+        int ind = Random.Range(0, obstacles.Length);
         Quaternion rotation = Quaternion.identity;
         // check if its a log
-       if (obstacles[ind].name == "Log0") {
-            rotation = Quaternion.AngleAxis(Random.Range(-90,90), Vector3.forward);
+        if (obstacles[ind].name == "Log0")
+        {
+            rotation = Quaternion.AngleAxis(Random.Range(-90, 90), Vector3.forward);
         }
         GameObject objInst = Instantiate(obstacles[ind], new Vector2(width, height), rotation);
         objInst.transform.parent = this.transform;
     }
 
-    void spawnSieve(float width, float height){
-        int direction = Random.Range(0,3);
+    void spawnSieve(float width, float height)
+    {
+        int direction = Random.Range(0, 3);
         int index = direction + (Score.sieveDifficulty * 3);
         GameObject objInst = Instantiate(sieves[index], new Vector2(width, height), Quaternion.identity);
         objInst.transform.parent = this.transform;
