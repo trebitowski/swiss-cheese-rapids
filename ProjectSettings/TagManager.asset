@@ -3,12 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Cheese
+  - Obstacle
+  - Riverbank
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - River
   - Water
   - UI
   - 
@@ -38,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Water
+    uniqueID: 3776714419
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
