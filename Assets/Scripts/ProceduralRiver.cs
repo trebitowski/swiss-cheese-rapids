@@ -10,6 +10,7 @@ public class ProceduralRiver : MonoBehaviour
     private float t;
     private float startTime;
     public float speed; // units per second
+    private int pixel_height = 3; // pixel height of water/bank layer
     private float unit_height = 10; // number of pixels in a Unity unit
     [SerializeField] GameObject water;
     [SerializeField] GameObject bank_left;
@@ -43,16 +44,16 @@ public class ProceduralRiver : MonoBehaviour
 
         if (waterEdge.y/unit_height < camTopPos)
         {
-            t += 1.0f;
+            t += (float)(pixel_height - 1);
             // add top layer of water
             Vector2 waterPos = riverFuntion(t);
-            float edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 0.25f*perlinFreq*t) - 0.5f)*2.0f; // dist from river center to first river edge
-            float bankLeftPos = Mathf.PerlinNoise(perlinFreq*t*2 + offset, 0.43f*perlinFreq*t); // dist from river center to first river edge
-            float bankRightPos = Mathf.PerlinNoise(perlinFreq*t*2.5f + offset, 0.12f*perlinFreq*t); // dist from river center to first river edge
+            float edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t, 0.25f*perlinFreq*t) - 0.5f)*2.0f; // dist from river center to first river edge
+            float bankLeftPos = Mathf.PerlinNoise(perlinFreq*t + offset, perlinFreq*t); // dist from river center to first river edge
+            float bankRightPos = Mathf.PerlinNoise(perlinFreq*t + 2*offset, perlinFreq*t); // dist from river center to first river edge            waterEdge = waterPos + riverFuntionPerp(edgeDist);
             waterEdge = waterPos + riverFuntionPerp(edgeDist);
             spawnRiver(water, (float)((int)(waterEdge.x*10.0f))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
-            spawnRiver(bank_left, (float)((int)(waterEdge.x*10.0f) - Mathf.Lerp(80, 110, bankLeftPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
-            spawnRiver(bank_right, (float)((int)(waterEdge.x*10.0f) + Mathf.Lerp(80, 110, bankRightPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
+            spawnRiver(bank_left, (float)((int)(waterEdge.x*10.0f) - Mathf.Lerp(90, 110, bankLeftPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
+            spawnRiver(bank_right, (float)((int)(waterEdge.x*10.0f) + Mathf.Lerp(90, 110, bankRightPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
 
                   
             if (obstacleTimer > Mathf.Lerp(obstacleRate, maxObstacleRate, Score.spawnDifficulty)) {
@@ -84,28 +85,25 @@ public class ProceduralRiver : MonoBehaviour
                 cheeseTimer = Random.Range(0, cheeseTimer);
             }
         }
-
-        
-
     }
 
     void Generation(){
         float edgeDist;
         float offset = 15;
         Vector2 waterPos;
-        for (int ind = 0; ind < riverLength; ind++)
+        for (int ind = 0; ind < riverLength; ind += pixel_height-1)
         {
             t = (float)ind;
             waterPos = riverFuntion(t);
-            edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t + offset, 0.25f*perlinFreq*t) - 0.5f)*2.0f; // dist from river center to first river edge
-            float bankLeftPos = Mathf.PerlinNoise(perlinFreq*t*2 + offset, 0.43f*perlinFreq*t); // dist from river center to first river edge
-            float bankRightPos = Mathf.PerlinNoise(perlinFreq*t*2.5f + offset, 0.12f*perlinFreq*t); // dist from river center to first river edge
+            edgeDist = perlinAmp*(Mathf.PerlinNoise(perlinFreq*t, 0.25f*perlinFreq*t) - 0.5f)*2.0f; // dist from river center to first river edge
+            float bankLeftPos = Mathf.PerlinNoise(perlinFreq*t + offset, perlinFreq*t); // dist from river center to first river edge
+            float bankRightPos = Mathf.PerlinNoise(perlinFreq*t + 2*offset, perlinFreq*t); // dist from river center to first river edge
             waterEdge = waterPos + riverFuntionPerp(edgeDist);
 
             // first river side
             spawnRiver(water, (float)((int)(waterEdge.x*10.0f))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
-            spawnRiver(bank_left, (float)((int)(waterEdge.x*10.0f) - Mathf.Lerp(80, 110, bankLeftPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
-            spawnRiver(bank_right, (float)((int)(waterEdge.x*10.0f) + Mathf.Lerp(80, 110, bankRightPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
+            spawnRiver(bank_left, (float)((int)(waterEdge.x*10.0f) - Mathf.Lerp(90, 110, bankLeftPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
+            spawnRiver(bank_right, (float)((int)(waterEdge.x*10.0f) + Mathf.Lerp(90, 110, bankRightPos))/10.0f, (float)((int)(waterEdge.y/unit_height*10.0f))/10.0f);
         }
     }
 
