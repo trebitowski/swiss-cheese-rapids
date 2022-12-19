@@ -17,6 +17,9 @@ public class ProceduralRiver : MonoBehaviour
     [SerializeField] GameObject bank_right;
     public GameObject[] cheeses;
     public GameObject[] obstacles;
+    public GameObject[] sieves;
+
+    public float sieveChance = 0.05f;
     public int obstacleTries;
     public float spawnWidthRange; // the total range of the spawnable width of the river
     Vector2 waterEdge;
@@ -57,6 +60,7 @@ public class ProceduralRiver : MonoBehaviour
 
                   
             if (obstacleTimer > Mathf.Lerp(obstacleRate, maxObstacleRate, Score.spawnDifficulty)) {
+                if (Random.value < sieveChance) { spawnSieve(waterEdge.x, waterEdge.y/unit_height); } else {
                  int count = Random.Range(1, Score.spawnTries + 1);
                 List<float> positions = new List<float>();
                 for (int i = 0; i < count; i++)
@@ -76,6 +80,7 @@ public class ProceduralRiver : MonoBehaviour
                 {
                     spawnObstacle(position, Random.Range(waterEdge.y/unit_height - obstacleHeightVariation, waterEdge.y/unit_height + obstacleHeightVariation));   
                 } 
+                }
                 obstacleTimer = Random.Range(0, 0.5f);
             }
 
@@ -136,6 +141,13 @@ public class ProceduralRiver : MonoBehaviour
 
     void spawnObstacle(float width, float height){
         GameObject objInst = Instantiate(obstacles[Random.Range(0,obstacles.Length)], new Vector2(width, height), Quaternion.identity);
+        objInst.transform.parent = this.transform;
+    }
+
+    void spawnSieve(float width, float height){
+        int direction = Random.Range(0,3);
+        int index = direction + (Score.sieveDifficulty * 3);
+        GameObject objInst = Instantiate(sieves[index], new Vector2(width, height), Quaternion.identity);
         objInst.transform.parent = this.transform;
     }
 }

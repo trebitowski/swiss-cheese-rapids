@@ -21,11 +21,13 @@ public class Score : MonoBehaviour
     public static float speedDifficulty = 0;
     public static float spawnDifficulty = 1;
     public static int spawnTries = 1;
+    public static int sieveDifficulty = 0;
 
     void Start() {
         speedDifficulty = 0;
         spawnDifficulty = 1;
         spawnTries = 1;
+        sieveDifficulty = 0;
 
         multiplierGameOverText.text = scorePerCheese.ToString() + "x";
     }
@@ -45,10 +47,20 @@ public class Score : MonoBehaviour
         scoreGameOverText.text =  totalScore.ToString();
         speedDifficulty = ((int)(distanceScore / speedDifficultyStep)) / 2.0f;
         spawnDifficulty = Mathf.InverseLerp(0, maxSpawnRateAtDistance, distanceScore);
-        if (spawnTries == 1 && distanceScore > 100) {
+        if (spawnTries == 1 && distanceScore > 75) {
             spawnTries = 2;
-        } else if (spawnTries == 2 && distanceScore > 250) {
+        } else if (spawnTries == 2 && distanceScore > 150) {
             spawnTries = 3;
+        }
+
+        if (sieveDifficulty == 0 && distanceScore > 75) {
+            sieveDifficulty = 1;
+        } else if (sieveDifficulty == 1 && distanceScore > 150) {
+            sieveDifficulty = 2;
+        } else if (sieveDifficulty == 2 && distanceScore > 225) {
+            sieveDifficulty = 3;
+        } else if (sieveDifficulty == 3 && distanceScore > 300) {
+            sieveDifficulty = 4;
         }
     }
 
