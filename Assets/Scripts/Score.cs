@@ -6,6 +6,10 @@ public class Score : MonoBehaviour
 {
     public TextMeshProUGUI cheeseText;
     public TextMeshProUGUI distanceText;
+    public TextMeshProUGUI distanceGameOverText;
+    public TextMeshProUGUI cheeseGameOverText;
+    public TextMeshProUGUI scoreGameOverText;
+    public TextMeshProUGUI multiplierGameOverText;
     public GameObject scoreCamera;
     public float scorePerDistance;
     public int scorePerCheese;
@@ -22,6 +26,8 @@ public class Score : MonoBehaviour
         speedDifficulty = 0;
         spawnDifficulty = 1;
         spawnTries = 1;
+
+        multiplierGameOverText.text = scorePerCheese.ToString() + "x";
     }
 
     // Update is called once per frame
@@ -32,6 +38,11 @@ public class Score : MonoBehaviour
         cheeseText.text = numberCheese.ToString();
         distanceText.text = distanceScore.ToString();
 
+        cheeseGameOverText.text = numberCheese.ToString();
+        distanceGameOverText.text = distanceScore.ToString();
+
+        int totalScore = (int)(numberCheese * scorePerCheese) + distanceScore;
+        scoreGameOverText.text =  totalScore.ToString();
         speedDifficulty = ((int)(distanceScore / speedDifficultyStep)) / 2.0f;
         spawnDifficulty = Mathf.InverseLerp(0, maxSpawnRateAtDistance, distanceScore);
         if (spawnTries == 1 && distanceScore > 100) {

@@ -12,7 +12,7 @@ public class GameManagerScript : MonoBehaviour
         if (gameHasEnded == false) {
             gameHasEnded = true;
             // Debug.Log("Game Over!");
-            scoreUI.SetActive(false);
+            //scoreUI.SetActive(false);
             gameOverUI.SetActive(true);
         }
     }
