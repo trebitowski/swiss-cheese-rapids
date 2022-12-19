@@ -87,12 +87,14 @@ public class Leaderboard : MonoBehaviour
         LootLockerSDKManager.GetMemberRank(leaderboardKey, playerID, (response) => {
             if (response.success) {
                 Debug.Log("leaderboard received");
+                    if (response.rank != 0) {
+
+
                 string tempPlayerName = "";
                 string tempPlayerScore = "";
 
-
                     tempPlayerName += response.rank + ". ";
-                    if (response.player.name != "") {
+                    if (response.player != null && response.player.name != "") {
                         tempPlayerName += response.player.name;
                     } else {
                         tempPlayerName += playerID;
@@ -106,7 +108,8 @@ public class Leaderboard : MonoBehaviour
                     } else if (texts[i].name == "userLeaderboardScore") {
                         texts[i].text = tempPlayerScore;
                     }
-                }             
+                }  
+                                    }       
                 done = true;
             } else {
                 Debug.Log("error fetching leaderboard" + response);
