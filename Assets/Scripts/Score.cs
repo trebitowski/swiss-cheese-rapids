@@ -24,6 +24,7 @@ public class Score : MonoBehaviour
     public static int sieveDifficulty = 0;
 
     public int totalScore;
+    public int distanceScore;
 
     void Start() {
         speedDifficulty = 0;
@@ -37,7 +38,7 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int distanceScore = (int)(scoreCamera.transform.position.y * scorePerDistance);
+        distanceScore = (int)(scoreCamera.transform.position.y * scorePerDistance);
         // int score = (int)(scorePerCheese * numberCheese) + distanceScore;
         cheeseText.text = numberCheese.ToString();
         distanceText.text = distanceScore.ToString();
