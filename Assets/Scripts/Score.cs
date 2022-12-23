@@ -6,6 +6,7 @@ public class Score : MonoBehaviour
 {
     public TextMeshProUGUI cheeseText;
     public TextMeshProUGUI distanceText;
+    public TextMeshProUGUI scoreText;
     public TextMeshProUGUI distanceGameOverText;
     public TextMeshProUGUI cheeseGameOverText;
     public TextMeshProUGUI scoreGameOverText;
@@ -47,6 +48,7 @@ public class Score : MonoBehaviour
         distanceGameOverText.text = distanceScore.ToString();
 
         totalScore = (int)(numberCheese * scorePerCheese) + distanceScore;
+        scoreText.text =  totalScore.ToString();
         scoreGameOverText.text =  totalScore.ToString();
         speedDifficulty = ((int)(distanceScore / speedDifficultyStep)) / 2.0f;
         spawnDifficulty = Mathf.InverseLerp(0, maxSpawnRateAtDistance, distanceScore);
