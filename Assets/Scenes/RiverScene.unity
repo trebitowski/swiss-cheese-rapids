@@ -2713,7 +2713,7 @@ MonoBehaviour:
   scorePerDistance: 0.1
   scorePerCheese: 15
   numberCheese: 0
-  speedDifficultyStep: 50
+  speedDifficultyStep: 25
   maxSpawnRateAtDistance: 1000
   totalScore: 0
   distanceScore: 0
