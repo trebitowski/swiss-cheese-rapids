@@ -22,7 +22,11 @@ public class ProceduralRiver : MonoBehaviour
     public GameObject whiteCaps;
 
     public float sieveChance = 0.05f;
-    private int sieveCounter = 0;
+    public int sieveObstacleBuffer = 5;
+    public int sieveSpawnStep = 2; //What step in the sieveObstacleBuffer the sieve spawns at (so there's space before and after)
+    public int sieveCooldown = 5;
+    private int sieveDelaySpawnSteps = 0;
+    private int sieveCooldownSteps = 0;
     public int obstacleTries;
     public float spawnWidthRange; // the total range of the spawnable width of the river
     Vector2 waterEdge;
@@ -82,14 +86,16 @@ public class ProceduralRiver : MonoBehaviour
 
         if (obstacleTimer > Mathf.Lerp(obstacleRate, maxObstacleRate, Score.spawnDifficulty))
         {
-            if (sieveCounter <= 0 && Random.value < sieveChance)
-            {
+            if (sieveDelaySpawnSteps > 0) {
+                sieveDelaySpawnSteps--;
+                if (sieveDelaySpawnSteps == sieveSpawnStep) { 
                 spawnSieve(waterEdge.x, waterEdge.y / unit_height);
-                sieveCounter = 5;
+                    sieveCooldownSteps = sieveCooldown;
             }
-            else
-            {
-                sieveCounter--;
+            } else if (sieveCooldownSteps <= 0 && Random.value < sieveChance) {
+                sieveDelaySpawnSteps = sieveObstacleBuffer;
+            } else {
+                sieveCooldownSteps--;
                 int count = Random.Range(1, Score.spawnTries + 1);
                 List<float> positions = new List<float>();
                 for (int i = 0; i < count; i++)

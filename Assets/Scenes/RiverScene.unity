@@ -2361,7 +2361,9 @@ MonoBehaviour:
   - {fileID: 9175419545560424610, guid: ab7d9bbce3ccb8d489dbdcf34ae492e9, type: 3}
   - {fileID: 9175419545560424610, guid: e46a7bf6cdef8684d93ebe065b5b5012, type: 3}
   whiteCaps: {fileID: 8477292878904910301, guid: de4f7b6d1c0ff4ab887ca9f23a4008f7, type: 3}
-  sieveChance: 0.05
+  sieveObstacleBuffer: 3
+  sieveSpawnStep: 2
+  sieveCooldown: 5
   obstacleTries: 2
   spawnWidthRange: 10
   obstacleRate: 0.85
