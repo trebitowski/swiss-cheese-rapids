@@ -247,11 +247,11 @@ public class ProceduralRiver : MonoBehaviour
         {
             if (treeObstacles[ind].name == "tree_left_obs0" || treeObstacles[ind].name == "tree_left_obs1" || treeObstacles[ind].name == "tree_left0" || treeObstacles[ind].name == "tree_left1")
             {
-                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x - spawnWidthRange - 3.0f, waterEdge.y / unit_height), Quaternion.identity);
+                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x - spawnWidthRange - 1.25f, waterEdge.y / unit_height), Quaternion.identity);
             }
             else
             {
-                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x + spawnWidthRange + 3.0f, waterEdge.y / unit_height), Quaternion.identity);
+                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x + spawnWidthRange + 1.25f, waterEdge.y / unit_height), Quaternion.identity);
             }
             objInst.transform.parent = this.transform;
         }
