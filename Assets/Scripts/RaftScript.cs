@@ -60,7 +60,7 @@ public class RaftScript : MonoBehaviour
         } else {
             spriteRenderer.sprite = left;
         }
-        angle += input * Time.deltaTime * angleStrength;
+        angle += input * Time.deltaTime * (angleStrength + (Score.speedDifficulty * 5));
         angle = Mathf.Clamp(angle, -maxAngle + targetAngle, maxAngle + targetAngle);
 
         
@@ -78,15 +78,16 @@ public class RaftScript : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, -angle);
         
         float normalizedAngle = Mathf.InverseLerp(-maxAngle + targetAngle, maxAngle + targetAngle, angle);
-        float horizontalSpeed = Mathf.Lerp(-moveStrength, moveStrength, normalizedAngle);
+        float horizontalSpeed = Mathf.Lerp(-moveStrength - (Score.speedDifficulty / 2), moveStrength + (Score.speedDifficulty / 2), normalizedAngle);
 
         float riverHorizontalComponent = (currentSpeed + Score.speedDifficulty) * Mathf.Sin(Mathf.Deg2Rad * targetAngle) ;
 
         // transform.position = transform.position + Time.deltaTime * Vector3.right *  // original
             // (riverHorizontalComponent + horizontalSpeed);
 
-        transform.position = transform.position + Time.deltaTime * Vector3.right * 
-            (riverHorizontalComponent + horizontalSpeed) + Time.deltaTime * Vector3.up * (currentSpeed + Score.speedDifficulty);
+        transform.position = transform.position + 
+                             Time.deltaTime * Vector3.right * (riverHorizontalComponent + horizontalSpeed) + 
+                             Time.deltaTime * Vector3.up * (currentSpeed + Score.speedDifficulty);
         }
     }
     
