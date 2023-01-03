@@ -11,7 +11,7 @@ public class CheeseMenuDestroy : MonoBehaviour
     void Start() {
         rect = gameObject.GetComponent<RectTransform>();
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (rect.position.y < destroyZone ) {
