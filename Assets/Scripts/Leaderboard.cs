@@ -261,7 +261,7 @@ public class Leaderboard : MonoBehaviour
                     } else {
                         tempPlayerName += response.rank + ". ";
                         tempPlayerName += response.player.name;
-                        tempPlayerScore += response.score;
+                        tempPlayerScore += response.score + "m";
                     }
 
                     TextMeshProUGUI[] texts = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
@@ -269,7 +269,7 @@ public class Leaderboard : MonoBehaviour
                         if (texts[i].name == "userDistanceName") {
                             texts[i].text = tempPlayerName;
                         } else if (texts[i].name == "userDistanceScore") {
-                            texts[i].text = tempPlayerScore + "m";
+                            texts[i].text = tempPlayerScore;
                         }
                     }      
                 done3 = true;
