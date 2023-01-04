@@ -46,6 +46,9 @@ public class ProceduralRiver : MonoBehaviour
     public float grassPeriod;
     private float camSize = 30.0f;
 
+    private static int treeBuffer = 1;
+    private int treeCooldownSteps = treeBuffer;
+
     private float offset;
 
     // Start is called before the first frame update
@@ -67,10 +70,7 @@ public class ProceduralRiver : MonoBehaviour
         cheeseTimer += Time.deltaTime;
         whiteCapsTimer += Time.deltaTime;
         grassTimer += Time.deltaTime;
-
-        bool openLeft = true;
-        bool openRight = true;
-
+        
         float edgeDist;
         float bankLeftPos;
         float bankRightPos;
@@ -99,6 +99,8 @@ public class ProceduralRiver : MonoBehaviour
         {
             if (sieveDelaySpawnSteps > 0) {
                 sieveDelaySpawnSteps--;
+                int onlyRedTree = 1;
+                if (Random.value > 0.5) spawnObstacleTree(onlyRedTree, Random.value > 0.5 ? 1 : -1);
                 if (sieveDelaySpawnSteps == sieveSpawnStep) { 
                 spawnSieve(waterEdge.x, waterEdge.y / unit_height);
                     sieveCooldownSteps = sieveCooldown;
@@ -109,6 +111,8 @@ public class ProceduralRiver : MonoBehaviour
                 sieveCooldownSteps--;
                 int count = Random.Range(1, Score.spawnTries + 1);
                 List<float> positions = new List<float>();
+                bool openLeft = true;
+                bool openRight = true;
                 for (int i = 0; i < count; i++)
                 {
                     float newPosition = Random.Range(waterEdge.x - spawnWidthRange, waterEdge.x + spawnWidthRange);
@@ -125,20 +129,24 @@ public class ProceduralRiver : MonoBehaviour
                         positions.Add(newPosition);
                         spawnObstacle(newPosition, Random.Range(waterEdge.y / unit_height - obstacleHeightVariation, waterEdge.y / unit_height + obstacleHeightVariation));
                         // check openings for obstacle tree
-                        if (newPosition < waterEdge.x - spawnWidthRange + 4)
+                        if (newPosition < waterEdge.x - spawnWidthRange + 4 || Random.Range(0.0f, 1.0f) <= 0.6f)
                         {
-                            openLeft = false;
+                            openLeft = false; // spawn left false
                         }
-                        if (newPosition > waterEdge.x + spawnWidthRange - 4)
+                        if (newPosition > waterEdge.x + spawnWidthRange - 4 || Random.Range(0.0f, 1.0f) <= 0.6f)
                         {
-                            openRight = false;
+                            openRight = false; // spawn right false
                         }
                     }
                 }
-                if (Random.Range(0.0f, 1.0f) <= 0.6f)
+                if (treeCooldownSteps <= 0 && Random.Range(0.0f, 1.0f) <= 0.8f && (openLeft || openRight))
                 {
                     // spawn trees roughly 60% as much as other obstacles
-                    spawnObstacleTree(openLeft, openRight);
+                    double stuff = 0.5*(1 - (openRight ? 1 : 0) + (openLeft ? 1 : 0));
+                    spawnObstacleTree(0, Random.value >= stuff ? 1 : -1);
+                    treeCooldownSteps = treeBuffer;
+                } else {
+                    treeCooldownSteps--;
                 }
             }
             obstacleTimer = Random.Range(0, 0.5f);
@@ -180,6 +188,10 @@ public class ProceduralRiver : MonoBehaviour
             spawnRiver(water, (float)((int)(waterEdge.x * 10.0f)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
             spawnRiver(bank_left, (float)((int)(waterEdge.x * 10.0f) - Mathf.Lerp(90, 110, bankLeftPos)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
             spawnRiver(bank_right, (float)((int)(waterEdge.x * 10.0f) + Mathf.Lerp(90, 110, bankRightPos)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
+
+            if (Random.value >= 0.97) spawnObstacleTree(1, Random.value > 0.5 ? 1 : -1);
+            int spawnPos = Random.Range(-1,2); // get -1, 0 or 1
+            if (Random.value >= 0.93) spawnGrass(spawnPos); // spawn grass on left or right side randomly
         }
     }
 
@@ -250,40 +262,13 @@ public class ProceduralRiver : MonoBehaviour
         objInst.transform.parent = this.transform;
     }
 
-    void spawnObstacleTree(bool openLeft, bool openRight)
+    void spawnObstacleTree(int onlyRedTree, int side)
     {
-        int ind = -1;
-        bool drawTree = false;
-        GameObject objInst;
-        if (openLeft && openRight)
-        {
-            ind = Random.Range(0, treeObstacles.Length);
-            drawTree = true;
-        }
-        else if (openLeft)
-        {
-            ind = Random.Range(0, 4);
-            drawTree = true;
-        }
-        else if (openRight)
-        {
-            ind = Random.Range(4, 8);
-            drawTree = true;
-        }
-
-        if (drawTree)
-        {
-            float distFromWater = 6;
-            if (treeObstacles[ind].name == "tree_left_obs0" || treeObstacles[ind].name == "tree_left_obs1" || treeObstacles[ind].name == "tree_left0" || treeObstacles[ind].name == "tree_left1")
-            {
-                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x - spawnWidthRange - distFromWater, waterEdge.y / unit_height), Quaternion.identity);
-            }
-            else
-            {
-                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x + spawnWidthRange + distFromWater, waterEdge.y / unit_height), Quaternion.identity);
-            }
-            objInst.transform.parent = this.transform;
-        }
+        float distFromWater = 6;
+        int ind = Random.Range(2 + 2*side, 6 + 2*side);
+        ind += onlyRedTree*(1-ind%2);
+        GameObject objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x + side * (spawnWidthRange + distFromWater), waterEdge.y / unit_height), Quaternion.identity);
+        objInst.transform.parent = this.transform;   
     }
 
     void spawnSieve(float width, float height)
