@@ -2138,7 +2138,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: '0
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fcd28a7acb2d56f4490a2c1d0dd095b5, type: 2}
   m_sharedMaterial: {fileID: 8975668226922579607, guid: fcd28a7acb2d56f4490a2c1d0dd095b5, type: 2}
@@ -2344,6 +2346,8 @@ MonoBehaviour:
   - {fileID: 8133731808803239846, guid: 1585d4d22ae3d09c98efd1aa4fc992b7, type: 3}
   - {fileID: 4096480566984827134, guid: 24fbb269d56b96e40b824e6f6d3ccc6c, type: 3}
   - {fileID: 1987815875054390159, guid: e5889cc6cec0803c9ad89ca3036714f4, type: 3}
+  grass:
+  - {fileID: 2720098978225065204, guid: c561dd402c729f86c9f6d011195e45bb, type: 3}
   sieves:
   - {fileID: 7153970372394830467, guid: 3ae37441aa13455419e21a9d1c584451, type: 3}
   - {fileID: 9175419545560424610, guid: 43756a5204ebd3c4d9f75ca4a63989f1, type: 3}
@@ -2361,6 +2365,7 @@ MonoBehaviour:
   - {fileID: 9175419545560424610, guid: ab7d9bbce3ccb8d489dbdcf34ae492e9, type: 3}
   - {fileID: 9175419545560424610, guid: e46a7bf6cdef8684d93ebe065b5b5012, type: 3}
   whiteCaps: {fileID: 8477292878904910301, guid: de4f7b6d1c0ff4ab887ca9f23a4008f7, type: 3}
+  sieveChance: 0.05
   sieveObstacleBuffer: 3
   sieveSpawnStep: 2
   sieveCooldown: 5
@@ -2372,6 +2377,7 @@ MonoBehaviour:
   cheeseRate: 5
   maxCheeseRate: 2
   whiteCapsRate: 1
+  grassPeriod: 0.5
 --- !u!4 &1316050310
 Transform:
   m_ObjectHideFlags: 0

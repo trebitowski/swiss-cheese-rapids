@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b1b3530c12f9e580d885d95b6d8190a4
+guid: de1d84991a546310d8df9afb23674fc8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,169 +117,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: trees-sheet-81x77_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 231
-        width: 81
-        height: 77
-      alignment: 9
-      pivot: {x: 0.14, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 004a83204b0d67edfa3023d10a865705
-      internalID: -1183017169
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trees-sheet-81x77_1
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 231
-        width: 81
-        height: 77
-      alignment: 9
-      pivot: {x: 0.14, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a0edaa79b3f413ff9840392739258598
-      internalID: -1275340305
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trees-sheet-81x77_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 154
-        width: 81
-        height: 77
-      alignment: 9
-      pivot: {x: 0.86, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c3793c848814efd32b9b7a7dfd5a02c9
-      internalID: 574768273
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trees-sheet-81x77_3
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 154
-        width: 81
-        height: 77
-      alignment: 9
-      pivot: {x: 0.86, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 01bbe08c891533705a415bde11a52247
-      internalID: -1008913608
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trees-sheet-81x77_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 77
-        width: 81
-        height: 77
-      alignment: 9
-      pivot: {x: 0.14, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eb9b949ce9e8b645a8caa311eee8ea77
-      internalID: -629182268
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trees-sheet-81x77_5
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 77
-        width: 81
-        height: 77
-      alignment: 9
-      pivot: {x: 0.14, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ced4ea3f97239bbf8bb872f3c0badfc3
-      internalID: -439256023
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trees-sheet-81x77_6
+      name: grass-sheet-16x22_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 81
-        height: 77
+        width: 16
+        height: 22
       alignment: 9
-      pivot: {x: 0.86, y: 0.1}
+      pivot: {x: 0.4892029, y: 0.1329014}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6dff69ba6da587818b6e17b2fd231984
-      internalID: 982442575
+      spriteID: 850167139bf648d6baedf5092ceeafec
+      internalID: -1894448532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trees-sheet-81x77_7
+      name: grass-sheet-16x22_1
       rect:
         serializedVersion: 2
-        x: 81
+        x: 16
         y: 0
-        width: 81
-        height: 77
+        width: 16
+        height: 22
       alignment: 9
-      pivot: {x: 0.86, y: 0.1}
+      pivot: {x: 0.4892029, y: 0.1329014}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45c15e454f2519e88b7277a232fe1bbe
-      internalID: -42630773
+      spriteID: 057bd474790f3928b9146a8357bea403
+      internalID: 2064189877
       vertices: []
       indices: 
       edges: []
@@ -295,14 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      trees-sheet-81x77_7: -42630773
-      trees-sheet-81x77_0: -1183017169
-      trees-sheet-81x77_5: -439256023
-      trees-sheet-81x77_2: 574768273
-      trees-sheet-81x77_1: -1275340305
-      trees-sheet-81x77_4: -629182268
-      trees-sheet-81x77_3: -1008913608
-      trees-sheet-81x77_6: 982442575
+      grass-sheet-16x22_0: -1894448532
+      grass-sheet-16x22_1: 2064189877
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

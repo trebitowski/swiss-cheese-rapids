@@ -18,6 +18,7 @@ public class ProceduralRiver : MonoBehaviour
     public GameObject[] cheeses;
     public GameObject[] obstacles;
     public GameObject[] treeObstacles;
+    public GameObject[] grass;
     public GameObject[] sieves;
     public GameObject whiteCaps;
 
@@ -41,6 +42,8 @@ public class ProceduralRiver : MonoBehaviour
     private float cheeseTimer;
     private float whiteCapsTimer = 0;
     public float whiteCapsRate;
+    private float grassTimer;
+    public float grassPeriod;
     private float camSize = 30.0f;
 
     private float offset;
@@ -63,6 +66,7 @@ public class ProceduralRiver : MonoBehaviour
         obstacleTimer += Time.deltaTime;
         cheeseTimer += Time.deltaTime;
         whiteCapsTimer += Time.deltaTime;
+        grassTimer += Time.deltaTime;
 
         bool openLeft = true;
         bool openRight = true;
@@ -82,6 +86,13 @@ public class ProceduralRiver : MonoBehaviour
             spawnRiver(water, (float)((int)(waterEdge.x * 10.0f)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
             spawnRiver(bank_left, (float)((int)(waterEdge.x * 10.0f) - Mathf.Lerp(90, 110, bankLeftPos)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
             spawnRiver(bank_right, (float)((int)(waterEdge.x * 10.0f) + Mathf.Lerp(90, 110, bankRightPos)) / 10.0f, (float)((int)(waterEdge.y / unit_height * 10.0f)) / 10.0f);
+        }
+
+        if (grassTimer > grassPeriod)
+        {
+            int spawnPos = Random.Range(-1,2); // get -1, 0 or 1
+            spawnGrass(spawnPos); // spawn grass on left or right side randomly
+            grassTimer = Random.Range(0, grassTimer);
         }
 
         if (obstacleTimer > Mathf.Lerp(obstacleRate, maxObstacleRate, Score.spawnDifficulty))
@@ -222,6 +233,23 @@ public class ProceduralRiver : MonoBehaviour
         objInst.transform.parent = this.transform;
     }
 
+    void spawnGrass(int spawnPos)
+    {
+        float randLeft = Random.Range(-3.0f, 1.0f);
+        float randRight = Random.Range(-1.0f, 3.0f);
+        float distFromWater = 5;
+        GameObject objInst;
+        if (spawnPos == -1){ // spawn left
+            objInst = Instantiate(grass[0], new Vector2(waterEdge.x - spawnWidthRange - distFromWater + randLeft, waterEdge.y / unit_height), Quaternion.identity);
+        } else if (spawnPos == 1){ // spawn right
+            objInst = Instantiate(grass[0], new Vector2(waterEdge.x + spawnWidthRange + distFromWater + randRight, waterEdge.y / unit_height), Quaternion.identity);
+        } else{
+            objInst = Instantiate(grass[0], new Vector2(waterEdge.x - spawnWidthRange - distFromWater + randLeft, waterEdge.y / unit_height), Quaternion.identity);
+            objInst = Instantiate(grass[0], new Vector2(waterEdge.x + spawnWidthRange + distFromWater + randRight, waterEdge.y / unit_height), Quaternion.identity);
+        }
+        objInst.transform.parent = this.transform;
+    }
+
     void spawnObstacleTree(bool openLeft, bool openRight)
     {
         int ind = -1;
@@ -245,13 +273,14 @@ public class ProceduralRiver : MonoBehaviour
 
         if (drawTree)
         {
+            float distFromWater = 6;
             if (treeObstacles[ind].name == "tree_left_obs0" || treeObstacles[ind].name == "tree_left_obs1" || treeObstacles[ind].name == "tree_left0" || treeObstacles[ind].name == "tree_left1")
             {
-                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x - spawnWidthRange - 1.25f, waterEdge.y / unit_height), Quaternion.identity);
+                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x - spawnWidthRange - distFromWater, waterEdge.y / unit_height), Quaternion.identity);
             }
             else
             {
-                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x + spawnWidthRange + 1.25f, waterEdge.y / unit_height), Quaternion.identity);
+                objInst = Instantiate(treeObstacles[ind], new Vector2(waterEdge.x + spawnWidthRange + distFromWater, waterEdge.y / unit_height), Quaternion.identity);
             }
             objInst.transform.parent = this.transform;
         }

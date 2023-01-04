@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RiverObjectDelete : MonoBehaviour
 {
-    private float destroyZone = -25;
+    private float destroyZone = -30;
 
     // Update is called once per frame
     void Update()
