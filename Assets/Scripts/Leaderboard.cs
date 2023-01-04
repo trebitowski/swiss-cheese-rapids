@@ -27,6 +27,12 @@ public class Leaderboard : MonoBehaviour
         bool done2 = false;
         bool done3 = false;
         string playerID = PlayerPrefs.GetString("PlayerID");
+        LootLockerSDKManager.GetPlayerName((response) =>
+{
+    if (response.success)
+    {
+        Debug.Log("Successfully retrieved player name: " + response.name);
+        if(response.name != ""){
         LootLockerSDKManager.SubmitScore(playerID, scoreToUpload, leaderboardKey, (response) => {
             if (response.success) {
                 Debug.Log("score submitted");
@@ -54,6 +60,16 @@ public class Leaderboard : MonoBehaviour
                 done3 = true;
             }
         });
+        }
+    } else
+    {
+        Debug.Log("Error getting player name");
+        done1 = true;
+        done2 = true;
+        done3 = true;
+    }
+});
+        
         yield return new WaitWhile(() => done1 == false || done2 == false || done3 == false);
     }
 
@@ -175,20 +191,19 @@ public class Leaderboard : MonoBehaviour
         LootLockerSDKManager.GetMemberRank(leaderboardKey, playerID, (response) => {
             if (response.success) {
                 Debug.Log("leaderboard received");
-                    if (response.rank != 0) {
+                    string tempPlayerName = "";
+                    string tempPlayerScore = "";
 
-
-                string tempPlayerName = "";
-                string tempPlayerScore = "";
-
-                    tempPlayerName += response.rank + ". ";
-                    if (response.player != null && response.player.name != "") {
-                        tempPlayerName += response.player.name;
+                    if (response.player == null || response.player.name == "" || response.rank == 0) {
+                        tempPlayerName += "Enter a name and play a game to join the leaderboard";
+                        tempPlayerScore += "";
                     } else {
-                        tempPlayerName += playerID;
+                        tempPlayerName += response.rank + ". ";
+                        tempPlayerName += response.player.name;
+                        tempPlayerScore += response.score;
                     }
-                    tempPlayerScore += response.score;
-
+                Debug.Log(tempPlayerName);
+                Debug.Log(tempPlayerScore);
                 TextMeshProUGUI[] texts = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
                 for (int i = 0; i < texts.Length; i++) {
                     if (texts[i].name == "userLeaderboardName") {
@@ -196,8 +211,7 @@ public class Leaderboard : MonoBehaviour
                     } else if (texts[i].name == "userLeaderboardScore") {
                         texts[i].text = tempPlayerScore;
                     }
-                }  
-                                    }       
+                }       
                 done1 = true;
             } else {
                 Debug.Log("error fetching leaderboard" + response);
@@ -206,20 +220,18 @@ public class Leaderboard : MonoBehaviour
         });
         LootLockerSDKManager.GetMemberRank(cheeseLeaderboardKey, playerID, (response) => {
             if (response.success) {
-                Debug.Log("leaderboard received");
-                    if (response.rank != 0) {
-
-
-                string tempPlayerName = "";
-                string tempPlayerScore = "";
-
-                    tempPlayerName += response.rank + ". ";
-                    if (response.player != null && response.player.name != "") {
-                        tempPlayerName += response.player.name;
+                // Debug.Log("leaderboard received");
+                   string tempPlayerName = "";
+                    string tempPlayerScore = "";
+                    
+                    if (response.player == null || response.player.name == "" || response.rank == 0) {
+                        tempPlayerName += "Enter a name and play a game to join the leaderboard";
+                        tempPlayerScore += "";
                     } else {
-                        tempPlayerName += playerID;
+                        tempPlayerName += response.rank + ". ";
+                        tempPlayerName += response.player.name;
+                        tempPlayerScore += response.score;
                     }
-                    tempPlayerScore += response.score;
 
                 TextMeshProUGUI[] texts = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
                 for (int i = 0; i < texts.Length; i++) {
@@ -228,8 +240,7 @@ public class Leaderboard : MonoBehaviour
                     } else if (texts[i].name == "userCheeseScore") {
                         texts[i].text = tempPlayerScore;
                     }
-                }  
-                                    }       
+                }        
                 done2 = true;
             } else {
                 Debug.Log("error fetching leaderboard" + response);
@@ -238,30 +249,29 @@ public class Leaderboard : MonoBehaviour
         });
         LootLockerSDKManager.GetMemberRank(distanceLeaderboardKey, playerID, (response) => {
             if (response.success) {
-                Debug.Log("leaderboard received");
-                    if (response.rank != 0) {
+                // Debug.Log("leaderboard received");
 
 
-                string tempPlayerName = "";
-                string tempPlayerScore = "";
+                    string tempPlayerName = "";
+                    string tempPlayerScore = "";
 
-                    tempPlayerName += response.rank + ". ";
-                    if (response.player != null && response.player.name != "") {
-                        tempPlayerName += response.player.name;
+                    if (response.player == null || response.player.name == "" || response.rank == 0) {
+                        tempPlayerName += "Enter a name and play a game to join the leaderboard";
+                        tempPlayerScore += "";
                     } else {
-                        tempPlayerName += playerID;
+                        tempPlayerName += response.rank + ". ";
+                        tempPlayerName += response.player.name;
+                        tempPlayerScore += response.score;
                     }
-                    tempPlayerScore += response.score;
 
-                TextMeshProUGUI[] texts = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
-                for (int i = 0; i < texts.Length; i++) {
-                    if (texts[i].name == "userDistanceName") {
-                        texts[i].text = tempPlayerName;
-                    } else if (texts[i].name == "userDistanceScore") {
-                        texts[i].text = tempPlayerScore + "m";
-                    }
-                }  
-                                    }       
+                    TextMeshProUGUI[] texts = Resources.FindObjectsOfTypeAll(typeof(TextMeshProUGUI)) as TextMeshProUGUI[];
+                    for (int i = 0; i < texts.Length; i++) {
+                        if (texts[i].name == "userDistanceName") {
+                            texts[i].text = tempPlayerName;
+                        } else if (texts[i].name == "userDistanceScore") {
+                            texts[i].text = tempPlayerScore + "m";
+                        }
+                    }      
                 done3 = true;
             } else {
                 Debug.Log("error fetching leaderboard" + response);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7454122499892238643}
   - component: {fileID: 4669426447281155676}
   - component: {fileID: 8449057170092858549}
-  - component: {fileID: -5565825496498872085}
+  - component: {fileID: -3258494068223189491}
   m_Layer: 0
   m_Name: tree_left_obs1
   m_TagString: Obstacle
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &8449057170092858549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae470013746e9c428986c4813fb93cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!70 &-5565825496498872085
-CapsuleCollider2D:
+--- !u!60 &-3258494068223189491
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,6 +111,24 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.2, y: -2.5}
-  m_Size: {x: 3, y: 1}
-  m_Direction: 1
+  m_Offset: {x: 3, y: 3}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.14, y: 0.1}
+    oldSize: {x: 8.1, y: 7.7}
+    newSize: {x: 8.1, y: 7.7}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 3.6616108, y: -3.0413435}
+      - {x: 3.6528397, y: -1.8940742}
+      - {x: 0.3416786, y: -2.4638126}
+      - {x: 0.40403536, y: -3.0520995}
+      - {x: 1.4940209, y: -3.0801294}
+      - {x: 1.7032267, y: -3.4453945}
+      - {x: 1.9659942, y: -3.4734251}
+      - {x: 2.1785135, y: -2.9085634}
+      - {x: 2.7387695, y: -2.9851375}
