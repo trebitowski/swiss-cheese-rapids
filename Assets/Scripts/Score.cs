@@ -54,18 +54,10 @@ public class Score : MonoBehaviour
         spawnDifficulty = Mathf.InverseLerp(0, maxSpawnRateAtDistance, distanceScore);
         if (spawnTries == 1 && distanceScore > 75) {
             spawnTries = 2;
-        } else if (spawnTries == 2 && distanceScore > 150) {
-            spawnTries = 3;
         }
 
-        if (sieveDifficulty == 0 && distanceScore > 75) {
+        if (sieveDifficulty == 0 && distanceScore > 125) {
             sieveDifficulty = 1;
-        } else if (sieveDifficulty == 1 && distanceScore > 150) {
-            sieveDifficulty = 2;
-        } else if (sieveDifficulty == 2 && distanceScore > 225) {
-            sieveDifficulty = 3;
-        } else if (sieveDifficulty == 3 && distanceScore > 300) {
-            sieveDifficulty = 4;
         }
     }
 
