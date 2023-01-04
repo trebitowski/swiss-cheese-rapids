@@ -6,8 +6,8 @@ public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
-    public float soundVolume = 0.5f;
-    public float musicVolume = 0.5f;
+    public float soundVolume;
+    public float musicVolume;
     public static AudioManager instance;
     public Slider soundSlider;
     public Slider musicSlider;
@@ -32,6 +32,8 @@ public class AudioManager : MonoBehaviour
     }
 
     void Start() {
+        soundVolume = PlayerPrefs.GetFloat("soundVolume", 0.5f);
+        musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
         AddListeners();
         Play("Music");
     }
@@ -57,15 +59,22 @@ public class AudioManager : MonoBehaviour
     }
 
     public void AddListeners() {
-        soundVolume = soundSlider.value;
+        soundSlider.value = soundVolume;
         soundSlider.onValueChanged.AddListener((v) => {
             soundVolume = v;
         });
-        musicVolume = musicSlider.value;
+
+        musicSlider.value = musicVolume;
         musicSlider.onValueChanged.AddListener((v) => {
             musicVolume = v;
             Sound s = Array.Find(sounds, sound => sound.Name == "Music");
             if (s != null) { s.source.volume = s.volume * musicVolume; }
         });
+
+    }
+
+    public void updatePlayerPreferences() {
+        PlayerPrefs.SetFloat("musicVolume", musicVolume);
+        PlayerPrefs.SetFloat("soundVolume", soundVolume);
     }
 }

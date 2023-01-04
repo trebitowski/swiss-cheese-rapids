@@ -25,13 +25,22 @@ public class SessionManager : MonoBehaviour
         LootLockerSDKManager.SetPlayerName(name, (response) => {
             if (response.success)
             {   
-                Debug.Log("successfully set player name");
-                Leaderboard.RefreshLeaderboard();
+                StartCoroutine(SubmitScoresAndRefresh());
             } else {
                 Debug.Log("error setting player name" + response);
             } 
         });
     }
+
+    public IEnumerator SubmitScoresAndRefresh() {
+        Leaderboard leaderBoard = FindObjectOfType<Leaderboard>();
+        int score = PlayerPrefs.GetInt("totalScore");
+        int cheese = PlayerPrefs.GetInt("cheeseScore");
+        int distance = PlayerPrefs.GetInt("distanceScore");
+        yield return leaderBoard.SubmitScoreRoutine(score, cheese, distance);
+        Leaderboard.RefreshLeaderboard();
+    }
+
     public IEnumerator SetupRoutine() {
         yield return LoginRoutine();
         yield return leaderboard.FetchTopHighscoresRoutine();
