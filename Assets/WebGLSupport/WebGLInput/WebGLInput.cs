@@ -112,7 +112,8 @@ namespace WebGLSupport
         static WebGLInput()
         {
 #if UNITY_2020_1_OR_NEWER
-            WebGLInput.CanvasId = "unity-container";
+            // WebGLInput.CanvasId = "unity-container"; // incompatible with "minimal-gl template"
+            WebGLInput.CanvasId = "gameContainer";
 #elif UNITY_2019_1_OR_NEWER
             WebGLInput.CanvasId = "unityContainer";
 #else

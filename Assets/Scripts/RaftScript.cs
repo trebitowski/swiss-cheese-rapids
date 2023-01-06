@@ -52,7 +52,29 @@ public class RaftScript : MonoBehaviour
              }
          }
 
-        float input = occupied == true ? Input.GetAxis("Horizontal") : 0;
+        float userInput = Input.GetAxis("Horizontal");
+
+        if (Input.touchSupported && userInput == 0.0f){
+            bool leftTouch = false;
+            bool rightTouch = false;
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled && !(leftTouch && rightTouch))
+                {
+                    if (touch.position.x < Screen.width/2){
+                        // left touch trigger
+                        leftTouch = true;
+                    }
+                    if (touch.position.x > Screen.width/2){
+                        // right touch trigger
+                        rightTouch = true;
+                    }
+                }
+            }
+            userInput = (leftTouch && rightTouch) ? 0 : (leftTouch ? -1 : (rightTouch ? 1 : 0));
+        }
+        
+        float input = occupied == true ? userInput : 0;
         if (input == 0) {
             spriteRenderer.sprite = normal;
         } else if (input > 0) {
