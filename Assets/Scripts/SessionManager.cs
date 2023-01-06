@@ -49,7 +49,9 @@ public class SessionManager : MonoBehaviour
 
     IEnumerator LoginRoutine() {
         bool done = false;
-        LootLockerSDKManager.StartGuestSession((response) =>
+        string guid = WebPlayerPrefs.HasKey("scr_guid") ? WebPlayerPrefs.GetString("scr_guid") : System.Guid.NewGuid().ToString();
+        WebPlayerPrefs.SetString("scr_guid", guid);
+        LootLockerSDKManager.StartGuestSession(guid, (response) =>
         {
             if (response.success)
             {
