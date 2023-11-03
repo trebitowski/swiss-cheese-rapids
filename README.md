@@ -2,7 +2,8 @@
 
 Unity game for [ScoreSpace Jam #23](https://itch.io/jam/scorejam23)
 
-![Swiss Cheese Rapids screenshot](https://github.com/trebitowski/swiss-cheese-rapids/assets/29380383/50d01615-ec5a-4196-acbc-fdfc6a8dd599)
+![Swiss Chees Rapids gameplay](https://github.com/trebitowski/swiss-cheese-rapids/assets/29380383/1d2f8b30-2e1b-4bf6-819c-12efc6dbd589)
+
 
 ## Table of Contents
 
